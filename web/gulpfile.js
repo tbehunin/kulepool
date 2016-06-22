@@ -81,7 +81,9 @@ gulp.task('start:server', function() {
     port: 9000,
     middleware:function(connect, opt){
       return [['/bower_components', 
-        connect["static"]('./bower_components')]]
+        connect["static"]('./bower_components')],
+        ['/node_modules', 
+        connect["static"]('./node_modules')]]
     }
   });
 });
