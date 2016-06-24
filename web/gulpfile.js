@@ -8,6 +8,8 @@ var lazypipe = require('lazypipe');
 var rimraf = require('rimraf');
 var wiredep = require('wiredep').stream;
 var runSequence = require('run-sequence');
+var browserify = require('gulp-browserify');
+var concat = require('gulp-concat');
 
 var yeoman = {
   app: require('./bower.json').appPath || 'app',
@@ -203,8 +205,18 @@ gulp.task('copy:fonts', function () {
     .pipe(gulp.dest(yeoman.dist + '/fonts'));
 });
 
+gulp.task('browserify', function () {
+  gulp.src(['app/scripts/app.js'])
+  .pipe(browserify({
+    insertGlobals: true,
+    debug: true
+  }))
+  .pipe(concat('bundle.js'))
+  .pipe(gulp.dest('app'));
+});
+
 gulp.task('build', ['clean:dist'], function () {
-  runSequence(['images', 'copy:extras', 'copy:fonts', 'client:build']);
+  runSequence(['images', 'copy:extras', 'copy:fonts', 'client:build', 'browserify']);
 });
 
 gulp.task('default', ['build']);

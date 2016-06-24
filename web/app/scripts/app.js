@@ -1,15 +1,17 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name webApp
- * @description
- * # webApp
- *
- * Main module of the application.
- */
-angular
-  .module('webApp', [
+var angular = require('angular');
+require('angular-animate');
+require('angular-aria');
+require('angular-cookies');
+require('angular-messages');
+require('angular-resource');
+require('angular-route');
+require('angular-sanitize');
+require('angular-touch');
+require('angular-ui-router');
+
+angular.module('webApp', [
     'ngAnimate',
     'ngAria',
     'ngCookies',
@@ -36,3 +38,5 @@ angular
         controllerAs: 'about'
       });
   });
+
+require('./controllers');
