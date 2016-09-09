@@ -36,6 +36,12 @@ angular.module('webApp', [
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
+      })
+      .state('students', {
+        url: '/students',
+        templateUrl: 'views/students.html',
+        controller: 'StudentsController',
+        controllerAs: 'students'
       });
   });
 

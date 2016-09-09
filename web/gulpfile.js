@@ -93,7 +93,7 @@ var lintScripts = lazypipe().pipe($.jshint, '.jshintrc').pipe($.jshint.reporter,
 // });
 // })
 
-gulp.task('browserSync', ['watch'], function (cb) {
+gulp.task('browsersync', ['watch'], function (cb) {
   browserSync.init({ proxy: 'localhost/kulepool' }, cb);
 });
 
@@ -182,12 +182,14 @@ gulp.task('clean', function () {
 
 gulp.task('index', function () {
   return gulp.src(appFiles.index)
-    .pipe(gulp.dest(distDirs.root));
+    .pipe(gulp.dest(distDirs.root))
+    .pipe(browserSync.reload({ stream: true }));
 });
 
 gulp.task('views', function () {
   return gulp.src(appFiles.allViews)
-    .pipe(gulp.dest(distDirs.views));
+    .pipe(gulp.dest(distDirs.views))
+    .pipe(browserSync.reload({ stream: true }));
 });
 
 gulp.task('images', function () {
