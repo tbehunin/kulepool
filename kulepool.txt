@@ -35,3 +35,11 @@ possible notifications generated while driving:
 		- student boarded bus
 		- student didn't board bus
 		- student arrived
+		
+UI: Students
+- View list of students
+	- last name, first name, grade level, school, assigned routes
+- Filter by school, grade, bus route, scheduled rider
+- Checkboxes next to each student for bulk operations
+	- Add to route
+	- Scheduled rider
