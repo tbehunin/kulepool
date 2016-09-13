@@ -31,15 +31,14 @@ module.exports = ['$scope', function ($scope) {
   
   self.select = function(student) {
     student.selected = !student.selected;
-    if (student.selected) {
-      selectedCount++;
-    }
-    else {
-      selectedCount--;
-    }
+    selectedCount = selectedCount + (student.selected ? 1 : -1);
   };
 
   self.getSelectedStudentCount = function () {
     return selectedCount > 0 ? '(' + selectedCount + ')' : '';
+  };
+
+  self.addToRouteDisabled = function () {
+    return selectedCount <= 0;
   };
 }];

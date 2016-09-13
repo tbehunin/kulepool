@@ -1,0 +1,11 @@
+.btn-filter {
+    font-size: 12px;
+    padding: 2px 4px;
+    border-color: #fff;
+    background-color: #fff;
+}
+
+.btn-filter:focus {
+    background-color: #fff;
+    border-color: #fff;
+}
