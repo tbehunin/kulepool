@@ -10,6 +10,7 @@ require('angular-route');
 require('angular-sanitize');
 require('angular-touch');
 require('angular-ui-router');
+require('angular-ui-bootstrap');
 
 angular.module('webApp', [
     'ngAnimate',
@@ -20,7 +21,8 @@ angular.module('webApp', [
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.router'
+    'ui.router',
+    'ui.bootstrap'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
