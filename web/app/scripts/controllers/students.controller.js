@@ -4,25 +4,40 @@ module.exports = ['$scope', function ($scope) {
   var self = this;
   var selectedCount = 0;
 
-  self.students = [
-    {
+  self.students = [{
       selected: false,
       lastName: 'Behunin',
       firstName: 'Ava',
       grade: '7',
-      schoolName: 'Meadow Park Middle School'},
+      schoolName: 'Meadow Park Middle School',
+      routes: [{
+        id: 1,
+        name: '24: Tucson St'
+      }, {
+        id: 2,
+        name: '25: York St'
+      }]
+    },
     {
       selected: false,
       lastName: 'Behunin',
       firstName: 'Eliza',
       grade: '5',
-      schoolName: 'Meadow Park Middle School'},
+      schoolName: 'Meadow Park Middle School',
+      routes: []
+    },
     {
       selected: false,
       lastName: 'Behunin',
       firstName: 'Grant',
       grade: '3',
-      schoolName: 'Meadow Park Middle School'}];
+      schoolName: 'Meadow Park Middle School',
+      routes: [{
+        id: 2,
+        name: '25: York St'
+      }]
+    }
+  ];
   
   self.routes = [{
       name: '24: Tucson St' },
@@ -40,5 +55,11 @@ module.exports = ['$scope', function ($scope) {
 
   self.addToRouteDisabled = function () {
     return selectedCount <= 0;
+  };
+
+  self.getAssignedRoutes = function (routes) {
+    return routes.map(function (item) {
+      return item.name;
+    }).join('<br>');
   };
 }];
