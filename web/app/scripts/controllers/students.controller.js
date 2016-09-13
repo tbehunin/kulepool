@@ -2,6 +2,8 @@
 
 module.exports = ['$scope', function ($scope) {
   var self = this;
+  var selectedCount = 0;
+
   self.students = [
     {
       selected: false,
@@ -22,7 +24,22 @@ module.exports = ['$scope', function ($scope) {
       grade: '3',
       schoolName: 'Meadow Park Middle School'}];
   
+  self.routes = [{
+      name: '24: Tucson St' },
+    {
+      name: '25: York St' }];
+  
   self.select = function(student) {
     student.selected = !student.selected;
+    if (student.selected) {
+      selectedCount++;
+    }
+    else {
+      selectedCount--;
+    }
+  };
+
+  self.getSelectedStudentCount = function () {
+    return selectedCount > 0 ? '(' + selectedCount + ')' : '';
   };
 }];
