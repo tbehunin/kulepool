@@ -14,6 +14,7 @@ var sass = require('gulp-sass');
 var inject = require('gulp-inject');
 var browserSync = require('browser-sync').create();
 var rename = require('gulp-rename');
+var concat = require('gulp-concat');
 
 argv.env = argv.env || 'debug'; // default to debug
 argv.env = argv.env.toLowerCase();
@@ -153,8 +154,8 @@ gulp.task('css', function () {
     return item.endsWith('.css');
   }).concat(appFiles.allCss);
 
-  return gulp.src(cssFiles)
-    .pipe(rename('compiledCss.css'))
+  return gulp.src(cssFiles, {base: './'})
+    .pipe(concat('compiledCss.css'))
     .pipe(gulp.dest(distDirs.styles))
     .pipe(browserSync.reload({ stream: true }));
 });
