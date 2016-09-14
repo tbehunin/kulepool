@@ -44,7 +44,7 @@ module.exports = ['$scope', function ($scope) {
     {
       name: '25: York St' }];
   
-  self.select = function(student) {
+  self.selectStudent = function(student) {
     student.selected = !student.selected;
     selectedCount = selectedCount + (student.selected ? 1 : -1);
   };
@@ -57,9 +57,7 @@ module.exports = ['$scope', function ($scope) {
     return selectedCount <= 0;
   };
 
-  self.getAssignedRoutes = function (routes) {
-    return routes.map(function (item) {
-      return item.name;
-    }).join('<br>');
+  self.showRoutes = function (routes) {
+    //$event.stopPropagation();
   };
 }];
