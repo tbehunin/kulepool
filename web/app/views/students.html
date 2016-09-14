@@ -55,7 +55,7 @@
             <td>{{student.grade}}</td>
             <td>{{student.schoolName}}</td>
             <td>
-                <button uib-popover="hello world!" popover-title="my title" type="button" class="btn btn-info" ng-click="students.showRoutes(student.routes); $event.stopPropagation();">
+                <button uib-popover="hello world!" popover-title="my title" popover-placement="right" popover-trigger="'outsideClick'" type="button" class="btn btn-info" ng-click="students.showRoutes(student.routes)">
                     {{student.routes.length}} <i class="fa fa-map-marker" aria-hidden="true"></i>
                 </button>
             </td>
