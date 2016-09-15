@@ -3,12 +3,6 @@
 module.exports = ['$scope', function ($scope) {
   var self = this;
 
-  function getSelectedStudentCount() {
-    return self.students.filter(function (item) {
-      return item.selected;
-    }).length;
-  }
-
   self.students = [
     {
       selected: false,
@@ -16,6 +10,7 @@ module.exports = ['$scope', function ($scope) {
       firstName: 'Ava',
       grade: '7',
       schoolName: 'Meadow Park Middle School',
+      eligible: true,
       routes: [
         {
           id: 1,
@@ -33,6 +28,7 @@ module.exports = ['$scope', function ($scope) {
       firstName: 'Eliza',
       grade: '5',
       schoolName: 'Meadow Park Middle School',
+      eligible: false,
       routes: []
     },
     {
@@ -41,6 +37,7 @@ module.exports = ['$scope', function ($scope) {
       firstName: 'Grant',
       grade: '3',
       schoolName: 'Meadow Park Middle School',
+      eligible: true,
       routes: [
         {
           id: 2,
@@ -86,13 +83,14 @@ module.exports = ['$scope', function ($scope) {
     student.selected = !student.selected;
   };
 
-  self.formatStudentCount = function () {
-    var count = getSelectedStudentCount();
-    return count > 0 ? '(' + count + ')' : '';
+  self.getSelectedStudentCount = function () {
+    return self.students.filter(function (item) {
+      return item.selected;
+    }).length;
   };
 
   self.addToRouteDisabled = function () {
-    return getSelectedStudentCount() <= 0;
+    return self.getSelectedStudentCount() <= 0;
   };
 
   self.filterableRoutes = function (routes) {
