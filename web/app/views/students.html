@@ -1,28 +1,23 @@
 <div class="btn-group" uib-dropdown>
     <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="students.addToRouteDisabled()">
-        Add to Route {{students.getSelectedStudentCount()}} <span class="caret"></span>
+        Add to Route {{students.formatStudentCount()}} <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" uib-dropdown-menu>
-        <li ng-repeat="route in students.routes"><a href="#">{{route.name}}</a></li>
+        <li ng-repeat="route in students.availableRoutes"><a href="#">{{route.name}}</a></li>
     </ul>
 </div>
 <table class="table table-hover">
     <thead>
         <tr>
-            <th></th>
-            <th>Last Name</th>
-            <th>First Name</th>
             <th>
-                Grade
-                <div class="btn-group" uib-dropdown>
-                    <button type="button" class="btn btn-default btn-filter" uib-dropdown-toggle>
-                        <span class="fa fa-filter"></span>
-                    </button>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ng-repeat="route in students.routes"><a href="#">{{route.name}}</a></li>
-                    </ul>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-click="students.toggleAll()" ng-model="students.selectAllChecked">
+                    </label>
                 </div>
             </th>
+            <th>Last Name</th>
+            <th>First Name</th>
             <th>
                 School
                 <div class="btn-group" uib-dropdown>
@@ -30,7 +25,18 @@
                         <span class="fa fa-filter"></span>
                     </button>
                     <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ng-repeat="route in students.routes"><a href="#">{{route.name}}</a></li>
+                        <li ng-repeat="school in students.availableSchools"><a href="#">{{school.name}}</a></li>
+                    </ul>
+                </div>
+            </th>
+            <th>
+                Grade
+                <div class="btn-group" uib-dropdown>
+                    <button type="button" class="btn btn-default btn-filter" uib-dropdown-toggle>
+                        <span class="fa fa-filter"></span>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu>
+                        <li ng-repeat="grade in students.availableGrades"><a href="#">{{grade.name}}</a></li>
                     </ul>
                 </div>
             </th>
@@ -41,7 +47,7 @@
                         <span class="fa fa-filter"></span>
                     </button>
                     <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ng-repeat="route in students.routes"><a href="#">{{route.name}}</a></li>
+                        <li ng-repeat="route in students.availableRoutes"><a href="#">{{route.name}}</a></li>
                     </ul>
                 </div>
             </th>
@@ -52,10 +58,10 @@
             <td><input type="checkbox" ng-checked="student.selected"></td>
             <td>{{student.lastName}}</td>
             <td>{{student.firstName}}</td>
-            <td>{{student.grade}}</td>
             <td>{{student.schoolName}}</td>
+            <td>{{student.grade}}</td>
             <td>
-                <button uib-popover="hello world!" popover-title="my title" popover-placement="right" popover-trigger="'outsideClick'" type="button" class="btn btn-info" ng-click="students.showRoutes(student.routes)">
+                <button uib-popover="hello world!" popover-title="my title" popover-placement="right" popover-trigger="'focus'" type="button" class="btn btn-info" ng-click="students.showRoutes(student.routes); $event.stopPropagation();">
                     {{student.routes.length}} <i class="fa fa-map-marker" aria-hidden="true"></i>
                 </button>
             </td>

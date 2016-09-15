@@ -2,21 +2,30 @@
 
 module.exports = ['$scope', function ($scope) {
   var self = this;
-  var selectedCount = 0;
 
-  self.students = [{
+  function getSelectedStudentCount() {
+    return self.students.filter(function (item) {
+      return item.selected;
+    }).length;
+  }
+
+  self.students = [
+    {
       selected: false,
       lastName: 'Behunin',
       firstName: 'Ava',
       grade: '7',
       schoolName: 'Meadow Park Middle School',
-      routes: [{
-        id: 1,
-        name: '24: Tucson St'
-      }, {
-        id: 2,
-        name: '25: York St'
-      }]
+      routes: [
+        {
+          id: 1,
+          name: '24: Tucson St'
+        },
+        {
+          id: 2,
+          name: '25: York St'
+        }
+      ]
     },
     {
       selected: false,
@@ -32,32 +41,61 @@ module.exports = ['$scope', function ($scope) {
       firstName: 'Grant',
       grade: '3',
       schoolName: 'Meadow Park Middle School',
-      routes: [{
-        id: 2,
-        name: '25: York St'
-      }]
+      routes: [
+        {
+          id: 2,
+          name: '25: York St'
+        }
+      ]
     }
   ];
   
-  self.routes = [{
-      name: '24: Tucson St' },
-    {
-      name: '25: York St' }];
+  self.availableRoutes = [
+    { id: 24, name: '24: Tucson St' },
+    { id: 25, name: '25: York St' }
+  ];
+
+  self.availableSchools = [
+    { id: 1, name: 'Bethany Elementary' },
+    { id: 2, name: 'Meadow Park Middle School' }
+  ];
+
+  self.availableGrades = [
+    { id: 1, name: 'K' },
+    { id: 2, name: '1' },
+    { id: 2, name: '2' },
+    { id: 2, name: '3' },
+    { id: 2, name: '4' },
+    { id: 2, name: '5' },
+    { id: 2, name: '6' },
+    { id: 2, name: '7' },
+    { id: 2, name: '8' },
+    { id: 2, name: '9' },
+    { id: 2, name: '10' },
+    { id: 2, name: '11' },
+    { id: 2, name: '12' }
+  ];
+
+  self.toggleAll = function () {
+    self.students.forEach(function (item) {
+      item.selected = !!self.selectAllChecked;
+    });
+  };
   
-  self.selectStudent = function(student) {
+  self.selectStudent = function (student) {
     student.selected = !student.selected;
-    selectedCount = selectedCount + (student.selected ? 1 : -1);
   };
 
-  self.getSelectedStudentCount = function () {
-    return selectedCount > 0 ? '(' + selectedCount + ')' : '';
+  self.formatStudentCount = function () {
+    var count = getSelectedStudentCount();
+    return count > 0 ? '(' + count + ')' : '';
   };
 
   self.addToRouteDisabled = function () {
-    return selectedCount <= 0;
+    return getSelectedStudentCount() <= 0;
   };
 
-  self.showRoutes = function (routes) {
+  self.filterableRoutes = function (routes) {
     //$event.stopPropagation();
   };
 }];
