@@ -48,29 +48,29 @@ module.exports = ['$scope', function ($scope) {
   ];
   
   self.availableRoutes = [
-    { id: 24, name: '24: Tucson St' },
-    { id: 25, name: '25: York St' }
+    { id: 24, name: '24: Tucson St', selected: false },
+    { id: 25, name: '25: York St', selected: false }
   ];
 
   self.availableSchools = [
-    { id: 1, name: 'Bethany Elementary' },
-    { id: 2, name: 'Meadow Park Middle School' }
+    { id: 1, name: 'Bethany Elementary', selected: false },
+    { id: 2, name: 'Meadow Park Middle School', selected: false }
   ];
 
   self.availableGrades = [
-    { id: 1, name: 'K' },
-    { id: 2, name: '1' },
-    { id: 2, name: '2' },
-    { id: 2, name: '3' },
-    { id: 2, name: '4' },
-    { id: 2, name: '5' },
-    { id: 2, name: '6' },
-    { id: 2, name: '7' },
-    { id: 2, name: '8' },
-    { id: 2, name: '9' },
-    { id: 2, name: '10' },
-    { id: 2, name: '11' },
-    { id: 2, name: '12' }
+    { id: 1, name: 'K', selected: false },
+    { id: 2, name: '1', selected: false },
+    { id: 2, name: '2', selected: false },
+    { id: 2, name: '3', selected: false },
+    { id: 2, name: '4', selected: false },
+    { id: 2, name: '5', selected: false },
+    { id: 2, name: '6', selected: false },
+    { id: 2, name: '7', selected: false },
+    { id: 2, name: '8', selected: false },
+    { id: 2, name: '9', selected: false },
+    { id: 2, name: '10', selected: false },
+    { id: 2, name: '11', selected: false },
+    { id: 2, name: '12', selected: false }
   ];
 
   self.toggleAll = function () {

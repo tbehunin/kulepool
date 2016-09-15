@@ -84,7 +84,7 @@
             <td>{{student.grade}}</td>
             <td><i class="fa" ng-class="{'fa-times': !student.eligible, 'fa-check': student.eligible}"></i></td>
             <td>
-                <button uib-popover="hello world!" popover-title="my title" popover-placement="right" popover-trigger="'focus'" type="button" class="btn btn-info" ng-click="students.showRoutes(student.routes); $event.stopPropagation();">
+                <button uib-popover="hello world!" popover-title="my title" popover-placement="right" popover-trigger="'focus'" popover-append-to-body="true" type="button" class="btn btn-info" ng-click="students.showRoutes(student.routes); $event.stopPropagation();">
                     {{student.routes.length}} <i class="fa fa-map-marker" aria-hidden="true"></i>
                 </button>
             </td>
