@@ -1,5 +1,5 @@
 <div class="btn-group" uib-dropdown ng-show="students.getSelectedStudentCount() > 0">
-    <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="students.addToRouteDisabled()">
+    <button type="button" class="btn btn-primary" uib-dropdown-toggle>
         {{students.getSelectedStudentCount()}} Selected <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" uib-dropdown-menu>
@@ -14,7 +14,7 @@
             <th>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" ng-click="students.toggleAll()" ng-model="students.selectAllChecked">
+                        <input type="checkbox" ng-click="students.toggleAllStudents()" ng-model="students.selectAllChecked">
                     </label>
                 </div>
             </th>
@@ -84,8 +84,9 @@
             <td>{{student.grade}}</td>
             <td><i class="fa" ng-class="{'fa-times': !student.eligible, 'fa-check': student.eligible}"></i></td>
             <td>
-                <button uib-popover="hello world!" popover-title="my title" popover-placement="right" popover-trigger="'focus'" popover-append-to-body="true" type="button" class="btn btn-info" ng-click="students.showRoutes(student.routes); $event.stopPropagation();">
-                    {{student.routes.length}} <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <button uib-popover-template="'views/routesPopupTemplate.html'" popover-is-open="student.assignedRoutes.show" popover-placement="right"
+                popover-trigger="'outsideClick'" popover-append-to-body="true" type="button" class="btn btn-info" ng-click="students.hideAllPopups(); $event.stopPropagation();">
+                    {{student.assignedRoutes.routes.length}} <i class="fa fa-map-marker" aria-hidden="true"></i>
                 </button>
             </td>
         </tr>

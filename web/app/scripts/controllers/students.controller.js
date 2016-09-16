@@ -11,16 +11,19 @@ module.exports = ['$scope', function ($scope) {
       grade: '7',
       schoolName: 'Meadow Park Middle School',
       eligible: true,
-      routes: [
-        {
-          id: 1,
-          name: '24: Tucson St'
-        },
-        {
-          id: 2,
-          name: '25: York St'
-        }
-      ]
+      assignedRoutes: {
+        show: false,
+        routes: [
+          {
+            id: 1,
+            name: '24: Tucson St'
+          },
+          {
+            id: 2,
+            name: '25: York St'
+          }
+        ]
+      }
     },
     {
       selected: false,
@@ -29,7 +32,10 @@ module.exports = ['$scope', function ($scope) {
       grade: '5',
       schoolName: 'Meadow Park Middle School',
       eligible: false,
-      routes: []
+      assignedRoutes: {
+        show: false,
+        routes: []
+      }
     },
     {
       selected: false,
@@ -38,12 +44,15 @@ module.exports = ['$scope', function ($scope) {
       grade: '3',
       schoolName: 'Meadow Park Middle School',
       eligible: true,
-      routes: [
-        {
-          id: 2,
-          name: '25: York St'
-        }
-      ]
+      assignedRoutes: {
+        show: false,
+        routes: [
+          {
+            id: 2,
+            name: '25: York St'
+          }
+        ]
+      }
     }
   ];
   
@@ -73,7 +82,7 @@ module.exports = ['$scope', function ($scope) {
     { id: 2, name: '12', selected: false }
   ];
 
-  self.toggleAll = function () {
+  self.toggleAllStudents = function () {
     self.students.forEach(function (item) {
       item.selected = !!self.selectAllChecked;
     });
@@ -89,11 +98,11 @@ module.exports = ['$scope', function ($scope) {
     }).length;
   };
 
-  self.addToRouteDisabled = function () {
-    return self.getSelectedStudentCount() <= 0;
+  self.hideAllPopups = function () {
+    self.students.forEach(function (student) {
+      student.assignedRoutes.show = false;
+    });
   };
 
-  self.filterableRoutes = function (routes) {
-    //$event.stopPropagation();
-  };
+  self.test = 'dlkfj';
 }];
