@@ -105,4 +105,8 @@ module.exports = ['$scope', function ($scope) {
   };
 
   self.test = 'dlkfj';
+
+  self.toggle = function () {
+    self.open = !self.open;
+  };
 }];

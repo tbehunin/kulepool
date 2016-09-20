@@ -35,16 +35,7 @@
             </th>
             <th>
                 Grade
-                <div class="btn-group" uib-dropdown>
-                    <button type="button" class="btn btn-default btn-filter" uib-dropdown-toggle>
-                        <span class="fa fa-filter"></span>
-                    </button>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li><a href="#">Clear filter</a></li>
-                        <li class="divider"></li>
-                        <li ng-repeat="grade in students.availableGrades"><a href="#">{{grade.name}}</a></li>
-                    </ul>
-                </div>
+                <multi-select-filter msf-options="students.availableGrades"></multi-select-filter>
             </th>
             <th>
                 Eligible

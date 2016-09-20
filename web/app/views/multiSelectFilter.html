@@ -1,0 +1,12 @@
+<div class="btn-group">
+    <button type="button" class="form-control btn btn-default btn-block dropdown-toggle" ng-click="toggleDropdown()">
+        <span class="fa fa-filter"></span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-form" ng-style="{display: isOpen ? 'block' : 'none'}">
+        <li ng-repeat="option in options">
+            <a href="" ng-click="toggleOption(option)">
+                <span class="fa fa-check" ng-show="option.selected"></span> {{option.name}}
+            </a>
+        </li>
+    </ul>
+</div>
