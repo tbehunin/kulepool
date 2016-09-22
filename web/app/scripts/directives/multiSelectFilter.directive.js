@@ -14,7 +14,13 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
 
             $scope.toggleOption = function (option) {
                 option.selected = !option.selected;
-            }
+            };
+
+            $scope.toggleAll = function (value) {
+                $scope.options.forEach(function (option) {
+                    option.selected = value;
+                });
+            };
 
             var closeHandler = function (event) {
                 if (!$element[0].contains(event.target)) {

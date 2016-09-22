@@ -3,9 +3,16 @@
         <span class="fa fa-filter"></span>
     </button>
     <ul class="dropdown-menu dropdown-menu-form" ng-style="{display: isOpen ? 'block' : 'none'}">
-        <li ng-repeat="option in options">
+        <li>
+            <a href="" ng-click="toggleAll(true)">Select All</a>
+        </li>
+        <li>
+            <a href="" ng-click="toggleAll(false)">Unselect All</a>
+        </li>
+        <li class="divider"></li>
+        <li ng-repeat="option in options" ng-class="{'active': option.selected}">
             <a href="" ng-click="toggleOption(option)">
-                <span class="fa fa-check" ng-show="option.selected"></span> {{option.name}}
+                <span class="fa fa-lg" ng-class="{'fa-check-square-o': option.selected, 'fa-square-o': !option.selected}"></span> {{option.name}}
             </a>
         </li>
     </ul>
