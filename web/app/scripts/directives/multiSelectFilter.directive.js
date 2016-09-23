@@ -22,6 +22,12 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
                 });
             };
 
+            $scope.anySelected = function () {
+                return $scope.options.some(function (option) {
+                    return option.selected;
+                });
+            };
+
             var closeHandler = function (event) {
                 if (!$element[0].contains(event.target)) {
                     $scope.$apply(function () {

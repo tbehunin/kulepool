@@ -1,11 +1,9 @@
 .btn-filter {
     font-size: 12px;
     padding: 2px 4px;
-    border-color: transparent;
-    background-color: transparent;
 }
 
-.btn-filter:focus {
-    background-color: transparent;
+.btn-filter.no-selection {
     border-color: transparent;
+    background-color: transparent;
 }
