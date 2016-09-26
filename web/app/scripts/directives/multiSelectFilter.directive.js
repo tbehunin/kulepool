@@ -29,6 +29,12 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
                 });
             };
 
+            $scope.selectionCount = function () {
+                return $scope.options.filter(function (option) {
+                    return option.selected;
+                }).length;
+            };
+
             var closeHandler = function (event) {
                 if (!$element[0].contains(event.target)) {
                     $scope.$apply(function () {
