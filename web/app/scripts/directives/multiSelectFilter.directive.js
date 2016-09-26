@@ -36,10 +36,15 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
             };
 
             var closeHandler = function (event) {
-                if (!$element[0].contains(event.target)) {
+                if ($element[0].contains(event.target)) {
+                    event.stopPropagation();
+                    $scope.$apply(function () {
+                        $scope.onClose();
+                    });
+                }
+                else {
                     $scope.$apply(function () {
                         $scope.isOpen = false;
-                        $scope.onClose();
                     });
                 }
             };
