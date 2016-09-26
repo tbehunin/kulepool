@@ -105,6 +105,9 @@ module.exports = ['$q', '$http', function ($q, $http) {
       data = angular.isArray(query.grades) && query.grades.length > 0 ? data.filter(function (item) {
         return query.grades.includes(item.grade.id);
       }) : data;
+      data = angular.isArray(query.eligibility) && query.eligibility.length > 0 ? data.filter(function (item) {
+        return query.eligibility.includes(item.eligible);
+      }) : data;
     }
     return $q.when(data);
   };

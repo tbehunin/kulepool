@@ -8,7 +8,7 @@ module.exports = [
     return list.filter(function (item) {
       return item.selected;
     }).map(function (item) {
-      return item.id;
+      return item.id || item.value;
     });
   }
 
@@ -16,6 +16,10 @@ module.exports = [
   self.availableRoutes = availableRoutes;
   self.availableSchools = availableSchools;
   self.availableGrades = availableGrades;
+  self.availableEligibility = [
+    { name: 'Eligible', value: true, selected: false },
+    { name: 'Ineligible', value: false, selected: false }
+  ];
 
   self.toggleAllStudents = function () {
     self.students.forEach(function (item) {
@@ -43,7 +47,7 @@ module.exports = [
     studentsService.getStudents({
       schools: getSelectedIds(self.availableSchools),
       grades: getSelectedIds(self.availableGrades),
-      eligibility: true // todo: fix
+      eligibility: getSelectedIds(self.availableEligibility)
     }).then(function (data) {
       self.students = data;
     });
