@@ -4,7 +4,8 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
     return {
         restrict: 'AE',
         scope: {
-            options: '=msfOptions'
+            options: '=msfOptions',
+            onClose: '&msfOnClose'
         },
         templateUrl: 'views/multiSelectFilter.html',
         link: function ($scope, $element) {
@@ -32,6 +33,7 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
                 if (!$element[0].contains(event.target)) {
                     $scope.$apply(function () {
                         $scope.isOpen = false;
+                        $scope.onClose();
                     });
                 }
             };

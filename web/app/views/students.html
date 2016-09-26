@@ -22,11 +22,11 @@
             <th>First Name</th>
             <th>
                 School
-                <multi-select-filter msf-options="students.availableSchools"></multi-select-filter>
+                <multi-select-filter msf-options="students.availableSchools" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
             <th>
                 Grade
-                <multi-select-filter msf-options="students.availableGrades"></multi-select-filter>
+                <multi-select-filter msf-options="students.availableGrades" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
             <th>
                 Eligible
@@ -53,8 +53,8 @@
             <td><input type="checkbox" ng-checked="student.selected"></td>
             <td>{{student.lastName}}</td>
             <td>{{student.firstName}}</td>
-            <td>{{student.schoolName}}</td>
-            <td>{{student.grade}}</td>
+            <td>{{student.school.name}}</td>
+            <td>{{student.grade.name}}</td>
             <td><i class="fa" ng-class="{'fa-times': !student.eligible, 'fa-check': student.eligible}"></i></td>
             <td>
                 <button uib-popover-template="'views/routesPopupTemplate.html'" popover-is-open="student.assignedRoutes.show" popover-placement="right"

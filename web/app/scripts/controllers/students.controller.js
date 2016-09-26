@@ -4,6 +4,14 @@ module.exports = [
   '$scope', 'studentsService', 'availableStudents', 'availableRoutes', 'availableSchools', 'availableGrades', function ($scope, studentsService, availableStudents, availableRoutes, availableSchools, availableGrades) {
   var self = this;
 
+  function getSelectedIds(list) {
+    return list.filter(function (item) {
+      return item.selected;
+    }).map(function (item) {
+      return item.id;
+    });
+  }
+
   self.students = availableStudents;
   self.availableRoutes = availableRoutes;
   self.availableSchools = availableSchools;
@@ -28,6 +36,16 @@ module.exports = [
   self.hideAllPopups = function () {
     self.students.forEach(function (student) {
       student.assignedRoutes.show = false;
+    });
+  };
+
+  self.filterStudents = function () {
+    studentsService.getStudents({
+      schools: getSelectedIds(self.availableSchools),
+      grades: getSelectedIds(self.availableGrades),
+      eligibility: true // todo: fix
+    }).then(function (data) {
+      self.students = data;
     });
   };
 

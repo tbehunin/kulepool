@@ -1,17 +1,17 @@
 <div class="btn-group dropdown" ng-class="{'open': isOpen}">
-    <button type="button" class="btn btn-default btn-filter dropdown-toggle" ng-class="{'btn-info': anySelected(), 'no-selection': !anySelected()}" ng-click="toggleDropdown()">
+    <button type="button" class="btn btn-default btn-filter dropdown-toggle" ng-class="{'btn-info': anySelected(), 'no-selection': !anySelected()}" ng-click="$event.stopPropagation(); toggleDropdown()">
         <span class="fa fa-filter"></span>
     </button>
     <ul class="dropdown-menu dropdown-menu-form" ng-style="{display: isOpen ? 'block' : 'none'}">
         <li>
-            <a href="" ng-click="toggleAll(true)">Select All</a>
+            <a href="" ng-click="$event.stopPropagation(); toggleAll(true)">Select All</a>
         </li>
         <li>
-            <a href="" ng-click="toggleAll(false)">Unselect All</a>
+            <a href="" ng-click="$event.stopPropagation(); toggleAll(false)">Unselect All</a>
         </li>
         <li class="divider"></li>
-        <li ng-repeat="option in options" ng-class="{'active': option.selected}">
-            <a href="" ng-click="toggleOption(option)">
+        <li ng-repeat="option in options" ng-class="{'active': option.selected}" ng-click="$event.stopPropagation(); toggleOption(option)">
+            <a href="">
                 <span class="fa fa-lg" ng-class="{'fa-check-square-o': option.selected, 'fa-square-o': !option.selected}"></span> {{option.name}}
             </a>
         </li>
