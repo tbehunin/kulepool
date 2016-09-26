@@ -43,9 +43,24 @@ angular.module('webApp', [
         url: '/students',
         templateUrl: 'views/students.html',
         controller: 'StudentsController',
-        controllerAs: 'students'
+        controllerAs: 'students',
+        resolve: {
+          availableStudents: function (studentsService) {
+            return studentsService.getStudents();
+          },
+          availableRoutes: function (studentsService) {
+            return studentsService.getRoutes();
+          },
+          availableSchools: function (studentsService) {
+            return studentsService.getSchools();
+          },
+          availableGrades: function (studentsService) {
+            return studentsService.getGrades();
+          }
+        }
       });
   });
 
+require('./services');
 require('./controllers');
 require('./directives');
