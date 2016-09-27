@@ -56,9 +56,12 @@ module.exports = [
   };
 
   self.sort = function (col) {
-    var desc = currentSort.col === col ? !currentSort.desc : false;
-    currentSort = {col = col, desc: desc};
+    currentSort = {col: col, desc: currentSort.col === col ? !currentSort.desc : false};
     self.filterStudents();
+  };
+
+  self.isCurrentSort = function (col, desc) {
+    return currentSort.col === col && (desc === undefined || currentSort.desc === desc);
   };
 
   self.test = 'dlkfj';

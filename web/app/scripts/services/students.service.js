@@ -102,6 +102,11 @@ module.exports = ['$q', '$http', function ($q, $http) {
       data = angular.isArray(query.eligibility) && query.eligibility.length > 0 ? data.filter(function (item) {
         return query.eligibility.includes(item.eligible);
       }) : data;
+      // data.sort(function (a, b) {
+      //   if ((query.sort || {}).desc) {
+      //     return query.sort.desc ? b.firstName - a.firstName : a.firstName - b;
+      //   }
+      // });
     }
     return $q.when(data);
   };

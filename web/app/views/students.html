@@ -18,38 +18,38 @@
                     </label>
                 </div>
             </th>
-            <th ng-click="students.sort('lastname')">
-                Last Name
-                <span class="fa fa-sort-asc" ng-if="students.currentSort('lastname', 'asc')"></span>
-                <span class="fa fa-sort-desc" ng-if="students.currentSort('lastname', 'desc')"></span>
+            <th>
+                <span ng-class="{'sort-col': students.isCurrentSort('lastname')}" ng-click="students.sort('lastname')">Last Name
+                    <span class="fa sort-arrow" ng-class="{'fa-sort-asc': students.isCurrentSort('lastname', false), 'fa-sort-desc': students.isCurrentSort('lastname', true)}"></span>
+                </span>
             </th>
-            <th ng-click="students.sort('firstname')">
-                First Name
-                <span class="fa fa-sort-asc" ng-if="students.currentSort('firstname', 'asc')"></span>
-                <span class="fa fa-sort-desc" ng-if="students.currentSort('firstname', 'desc')"></span>
+            <th>
+                <span ng-class="{'sort-col': students.isCurrentSort('firstname')}" ng-click="students.sort('firstname')">First Name
+                    <span class="fa" ng-class="{'fa-sort-asc': students.isCurrentSort('firstname', false), 'fa-sort-desc': students.isCurrentSort('firstname', true)}"></span>
+                </span>
             </th>
-            <th ng-click="students.sort('school')">
-                School
-                <span class="fa fa-sort-asc" ng-if="students.currentSort('school', 'asc')"></span>
-                <span class="fa fa-sort-desc" ng-if="students.currentSort('school', 'desc')"></span>
+            <th>
+                <span ng-class="{'sort-col': students.isCurrentSort('school')}" ng-click="students.sort('school')">School
+                    <span class="fa" ng-class="{'fa-sort-asc': students.isCurrentSort('school', false), 'fa-sort-desc': students.isCurrentSort('school', true)}"></span>
+                </span>
                 <multi-select-filter msf-options="students.availableSchools" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
-            <th ng-click="students.sort('grade')">
-                Grade
-                <span class="fa fa-sort-asc" ng-if="students.currentSort('grade', 'asc')"></span>
-                <span class="fa fa-sort-desc" ng-if="students.currentSort('grade', 'desc')"></span>
+            <th>
+                <span ng-class="{'sort-col': students.isCurrentSort('grade')}" ng-click="students.sort('grade')">Grade
+                    <span class="fa" ng-class="{'fa-sort-asc': students.isCurrentSort('grade', false), 'fa-sort-desc': students.isCurrentSort('grade', true)}"></span>
+                </span>
                 <multi-select-filter msf-options="students.availableGrades" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
-            <th ng-click="students.sort('eligibility')">
-                Eligible
-                <span class="fa fa-sort-asc" ng-if="students.currentSort('eligibility', 'asc')"></span>
-                <span class="fa fa-sort-desc" ng-if="students.currentSort('eligibility', 'desc')"></span>
+            <th>
+                <span ng-class="{'sort-col': students.isCurrentSort('eligibility')}" ng-click="students.sort('eligibility')">Eligible
+                    <span class="fa" ng-class="{'fa-sort-asc': students.isCurrentSort('eligibility', false), 'fa-sort-desc': students.isCurrentSort('eligibility', true)}"></span>
+                </span>
                 <multi-select-filter msf-options="students.availableEligibility" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
-            <th ng-click="students.sort('assignedroutes')">
-                Assigned Routes
-                <span class="fa fa-sort-asc" ng-if="students.currentSort('assignedroutes', 'asc')"></span>
-                <span class="fa fa-sort-desc" ng-if="students.currentSort('assignedroutes', 'desc')"></span>
+            <th>
+                <span ng-class="{'sort-col': students.isCurrentSort('assignedroutes')}" ng-click="students.sort('assignedroutes')">Assigned Routes
+                    <span class="fa" ng-class="{'fa-sort-asc': students.isCurrentSort('assignedroutes', false), 'fa-sort-desc': students.isCurrentSort('assignedroutes', true)}"></span>
+                </span>
                 <multi-select-filter msf-options="students.availableRoutes"></multi-select-filter>
             </th>
         </tr>
