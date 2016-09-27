@@ -3,6 +3,7 @@
 module.exports = [
   '$scope', 'studentsService', 'availableStudents', 'availableRoutes', 'availableSchools', 'availableGrades', function ($scope, studentsService, availableStudents, availableRoutes, availableSchools, availableGrades) {
   var self = this;
+  var currentSort = {};
 
   function getSelectedIds(list) {
     return list.filter(function (item) {
@@ -47,10 +48,17 @@ module.exports = [
     studentsService.getStudents({
       schools: getSelectedIds(self.availableSchools),
       grades: getSelectedIds(self.availableGrades),
-      eligibility: getSelectedIds(self.availableEligibility)
+      eligibility: getSelectedIds(self.availableEligibility),
+      sort: currentSort
     }).then(function (data) {
       self.students = data;
     });
+  };
+
+  self.sort = function (col) {
+    var desc = currentSort.col === col ? !currentSort.desc : false;
+    currentSort = {col = col, desc: desc};
+    self.filterStudents();
   };
 
   self.test = 'dlkfj';

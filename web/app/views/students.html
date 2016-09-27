@@ -18,22 +18,38 @@
                     </label>
                 </div>
             </th>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>
+            <th ng-click="students.sort('lastname')">
+                Last Name
+                <span class="fa fa-sort-asc" ng-if="students.currentSort('lastname', 'asc')"></span>
+                <span class="fa fa-sort-desc" ng-if="students.currentSort('lastname', 'desc')"></span>
+            </th>
+            <th ng-click="students.sort('firstname')">
+                First Name
+                <span class="fa fa-sort-asc" ng-if="students.currentSort('firstname', 'asc')"></span>
+                <span class="fa fa-sort-desc" ng-if="students.currentSort('firstname', 'desc')"></span>
+            </th>
+            <th ng-click="students.sort('school')">
                 School
+                <span class="fa fa-sort-asc" ng-if="students.currentSort('school', 'asc')"></span>
+                <span class="fa fa-sort-desc" ng-if="students.currentSort('school', 'desc')"></span>
                 <multi-select-filter msf-options="students.availableSchools" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
-            <th>
+            <th ng-click="students.sort('grade')">
                 Grade
+                <span class="fa fa-sort-asc" ng-if="students.currentSort('grade', 'asc')"></span>
+                <span class="fa fa-sort-desc" ng-if="students.currentSort('grade', 'desc')"></span>
                 <multi-select-filter msf-options="students.availableGrades" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
-            <th>
+            <th ng-click="students.sort('eligibility')">
                 Eligible
+                <span class="fa fa-sort-asc" ng-if="students.currentSort('eligibility', 'asc')"></span>
+                <span class="fa fa-sort-desc" ng-if="students.currentSort('eligibility', 'desc')"></span>
                 <multi-select-filter msf-options="students.availableEligibility" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
-            <th>
+            <th ng-click="students.sort('assignedroutes')">
                 Assigned Routes
+                <span class="fa fa-sort-asc" ng-if="students.currentSort('assignedroutes', 'asc')"></span>
+                <span class="fa fa-sort-desc" ng-if="students.currentSort('assignedroutes', 'desc')"></span>
                 <multi-select-filter msf-options="students.availableRoutes"></multi-select-filter>
             </th>
         </tr>
