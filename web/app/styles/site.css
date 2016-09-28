@@ -10,9 +10,8 @@
 
 .sort-col {
     color: #46b8da;
-    outline: none;
 }
 
-.sort-col:active:focus {
-    outline: none;
+:focus {
+    outline: 0;
 }
