@@ -8,8 +8,8 @@
     background-color: transparent;
 }
 
-.sort-col {
-    color: #46b8da;
+.sort-col-header {
+    border-bottom: 4px solid #46b8da !important;
 }
 
 :focus {

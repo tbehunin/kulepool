@@ -11,43 +11,43 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>
+            <th class="col-md-1">
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" ng-click="students.toggleAllStudents()" ng-model="students.selectAllChecked">
                     </label>
                 </div>
             </th>
-            <th>
-                <span ng-class="{'sort-col': students.isCurrentSort('lastname')}" ng-click="students.sort('lastname')">Last Name
+            <th class="col-md-2" ng-class="{'sort-col-header': students.isCurrentSort('lastname')}">
+                <span ng-click="students.sort('lastname')">Last Name
                     <span class="fa sort-arrow" ng-class="{'fa-sort-asc': students.isCurrentSort('lastname', false), 'fa-sort-desc': students.isCurrentSort('lastname', true)}"></span>
                 </span>
             </th>
-            <th>
-                <span ng-class="{'sort-col': students.isCurrentSort('firstname')}" ng-click="students.sort('firstname')">First Name
+            <th class="col-md-2" ng-class="{'sort-col-header': students.isCurrentSort('firstname')}">
+                <span ng-click="students.sort('firstname')">First Name
                     <span class="fa" ng-class="{'fa-sort-asc': students.isCurrentSort('firstname', false), 'fa-sort-desc': students.isCurrentSort('firstname', true)}"></span>
                 </span>
             </th>
-            <th>
-                <span ng-class="{'sort-col': students.isCurrentSort('school')}" ng-click="students.sort('school')">School
+            <th class="col-md-3" ng-class="{'sort-col-header': students.isCurrentSort('school')}">
+                <span ng-click="students.sort('school')">School
                     <span class="fa" ng-class="{'fa-sort-asc': students.isCurrentSort('school', false), 'fa-sort-desc': students.isCurrentSort('school', true)}"></span>
                 </span>
                 <multi-select-filter msf-options="students.availableSchools" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
-            <th>
-                <span ng-class="{'sort-col': students.isCurrentSort('grade')}" ng-click="students.sort('grade')">Grade
+            <th class="col-md-1" ng-class="{'sort-col-header': students.isCurrentSort('grade')}">
+                <span ng-click="students.sort('grade')">Grade
                     <span class="fa" ng-class="{'fa-sort-asc': students.isCurrentSort('grade', false), 'fa-sort-desc': students.isCurrentSort('grade', true)}"></span>
                 </span>
                 <multi-select-filter msf-options="students.availableGrades" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
-            <th>
-                <span ng-class="{'sort-col': students.isCurrentSort('eligibility')}" ng-click="students.sort('eligibility')">Eligible
+            <th class="col-md-1" ng-class="{'sort-col-header': students.isCurrentSort('eligibility')}">
+                <span ng-click="students.sort('eligibility')">Eligible
                     <span class="fa" ng-class="{'fa-sort-asc': students.isCurrentSort('eligibility', false), 'fa-sort-desc': students.isCurrentSort('eligibility', true)}"></span>
                 </span>
                 <multi-select-filter msf-options="students.availableEligibility" msf-on-close="students.filterStudents()"></multi-select-filter>
             </th>
-            <th>
-                <span ng-class="{'sort-col': students.isCurrentSort('assignedroutes')}" ng-click="students.sort('assignedroutes')">Assigned Routes
+            <th class="col-md-2" ng-class="{'sort-col-header': students.isCurrentSort('assignedroutes')}">
+                <span ng-click="students.sort('assignedroutes')">Assigned Routes
                     <span class="fa" ng-class="{'fa-sort-asc': students.isCurrentSort('assignedroutes', false), 'fa-sort-desc': students.isCurrentSort('assignedroutes', true)}"></span>
                 </span>
                 <multi-select-filter msf-options="students.availableRoutes"></multi-select-filter>
@@ -57,12 +57,12 @@
     <tbody>
         <tr ng-repeat="student in students.students" ng-click="students.selectStudent(student)" blur-on-click ng-class="{'active' : student.selected }">
             <td><input type="checkbox" ng-checked="student.selected"></td>
-            <td>{{student.lastName}}</td>
-            <td>{{student.firstName}}</td>
-            <td>{{student.school.name}}</td>
-            <td>{{student.grade.name}}</td>
-            <td><i class="fa" ng-class="{'fa-times': !student.eligible, 'fa-check': student.eligible}"></i></td>
-            <td>
+            <td ng-class="{'bg-info': students.isCurrentSort('lastname')}">{{student.lastName}}</td>
+            <td ng-class="{'bg-info': students.isCurrentSort('firstname')}">{{student.firstName}}</td>
+            <td ng-class="{'bg-info': students.isCurrentSort('school')}">{{student.school.name}}</td>
+            <td ng-class="{'bg-info': students.isCurrentSort('grade')}">{{student.grade.name}}</td>
+            <td ng-class="{'bg-info': students.isCurrentSort('eligibility')}"><i class="fa" ng-class="{'fa-times': !student.eligible, 'fa-check': student.eligible}"></i></td>
+            <td ng-class="{'bg-info': students.isCurrentSort('assignedroutes')}">
                 <button uib-popover-template="'views/routesPopupTemplate.html'" popover-is-open="student.assignedRoutes.show" popover-placement="right"
                 popover-trigger="'outsideClick'" popover-append-to-body="true" type="button" class="btn btn-info" ng-click="students.hideAllPopups(); $event.stopPropagation();">
                     {{student.assignedRoutes.routes.length}} <i class="fa fa-map-marker" aria-hidden="true"></i>
