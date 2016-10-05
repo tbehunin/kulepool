@@ -35,6 +35,14 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
                 }).length;
             };
 
+            $scope.getTooltipTitle = function () {
+                return $scope.options.filter(function (option) {
+                    return option.selected;
+                }).map(function (option) {
+                    return option.name;
+                }).join(', ');
+            };
+
             var closeHandler = function (event) {
                 if ($element[0].contains(event.target)) {
                     event.stopPropagation();
