@@ -102,11 +102,40 @@ module.exports = ['$q', '$http', function ($q, $http) {
       data = angular.isArray(query.eligibility) && query.eligibility.length > 0 ? data.filter(function (item) {
         return query.eligibility.includes(item.eligible);
       }) : data;
-      // data.sort(function (a, b) {
-      //   if ((query.sort || {}).desc) {
-      //     return query.sort.desc ? b.firstName - a.firstName : a.firstName - b;
-      //   }
-      // });
+      if (query.sort && query.sort.col) {
+        data = data.sort(function (a, b) {
+          var first = null, second = null;
+          switch (query.sort.col) {
+            case 'lastname':
+              first = a.lastName;
+              second = b.lastName;
+              break;
+            case 'firstname':
+              first = a.firstName;
+              second = b.firstName;
+              break;
+            case 'school':
+              first = a.school.name;
+              second = b.school.name;
+              break;
+            case 'grade':
+              first = a.grade.name;
+              second = b.grade.name;
+              break;
+            case 'eligibility':
+              first = a.eligible;
+              second = b.eligible;
+              break;
+          }
+          if (query.sort.desc) {
+            // Swap
+            var tmp = first;
+            first = second;
+            second = tmp;
+          }
+          return first < second ? -1 : first > second ? 1 : 0;
+        });
+      }
     }
     return $q.when(data);
   };

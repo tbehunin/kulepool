@@ -46,11 +46,9 @@
                     <span class="fa fa-fw" ng-class="{'fa-sort-asc': students.isCurrentSort('eligibility', false), 'fa-sort-desc': students.isCurrentSort('eligibility', true)}"></span>
                 </span>
             </th>
-            <th class="col-md-2" ng-class="{'sort-col-header': students.isCurrentSort('assignedroutes')}">
+            <th class="col-md-2">
                 <multi-select-filter msf-options="students.availableRoutes"></multi-select-filter>
-                <span ng-click="students.sort('assignedroutes')">Assigned Routes
-                    <span class="fa fa-fw" ng-class="{'fa-sort-asc': students.isCurrentSort('assignedroutes', false), 'fa-sort-desc': students.isCurrentSort('assignedroutes', true)}"></span>
-                </span>
+                <span>Assigned Routes</span>
             </th>
         </tr>
     </thead>
