@@ -19,3 +19,9 @@
 .container {
     max-width: 1200px !important;
 }
+
+.scrollable-menu {
+    height: auto;
+    max-height: 500px;
+    overflow-x: hidden;
+}
