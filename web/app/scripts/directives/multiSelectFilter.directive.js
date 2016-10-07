@@ -43,6 +43,12 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
                 }).join(', ');
             };
 
+            $scope.allOptionsSelection = function (value) {
+                return $scope.options.every(function (option) {
+                    return !!option.selected === value;
+                });
+            };
+
             var closeHandler = function (event) {
                 if ($element[0].contains(event.target)) {
                     event.stopPropagation();

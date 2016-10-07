@@ -5,10 +5,10 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-form scrollable-menu" ng-style="{display: isOpen ? 'block' : 'none'}">
         <li>
-            <a href="" ng-click="toggleAll(true)">Select All</a>
+            <button class="btn btn-link" disabled="disabled" ng-click="toggleAll(true)" ng-disabled="allOptionsSelection(true)"><i class="fa fa-check-square-o"></i> Select All</button>
         </li>
         <li>
-            <a href="" ng-click="toggleAll(false)">Clear</a>
+            <button class="btn btn-link" disabled="disabled" ng-click="toggleAll(false)" ng-disabled="allOptionsSelection(false)"><i class="fa fa-square-o"></i> Clear All</button>
         </li>
         <li class="divider"></li>
         <li ng-repeat="option in options" ng-class="{'active': option.selected}" ng-click="toggleOption(option)">
