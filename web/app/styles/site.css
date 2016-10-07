@@ -8,6 +8,11 @@
     background-color: transparent;
 }
 
+.btn-filter.no-selection:hover {
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+
 .sort-col-header {
     border-bottom: 3px solid #46b8da !important;
 }

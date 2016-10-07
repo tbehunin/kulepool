@@ -1,5 +1,5 @@
 <div class="btn-group dropdown" ng-class="{'open': isOpen}">
-    <button type="button" class="btn btn-default btn-filter dropdown-toggle" ng-class="{'btn-info': anySelected(), 'no-selection': !anySelected()}" ng-click="toggleDropdown()" ng-attr-title="{{getTooltipTitle()}}">
+    <button type="button" class="btn dropdown-toggle btn-filter" ng-class="{'btn-info': anySelected(), 'btn-default no-selection': !anySelected()}" ng-click="toggleDropdown()" ng-attr-title="{{getTooltipTitle()}}">
         <span class="fa fa-filter"></span>
         <span ng-if="anySelected()">{{selectionCount()}}</span>
     </button>
