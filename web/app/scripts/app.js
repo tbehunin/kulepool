@@ -56,6 +56,9 @@ angular.module('webApp', [
           },
           availableGrades: function (studentsService) {
             return studentsService.getGrades();
+          },
+          availableTags: function (studentsService) {
+            return studentsService.getTags();
           }
         }
       });

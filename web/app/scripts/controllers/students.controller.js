@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = [
-  '$scope', 'studentsService', 'availableStudents', 'availableRoutes', 'availableSchools', 'availableGrades', function ($scope, studentsService, availableStudents, availableRoutes, availableSchools, availableGrades) {
+  '$scope', 'studentsService', 'availableStudents', 'availableRoutes', 'availableSchools', 'availableGrades', 'availableTags', function ($scope, studentsService, availableStudents, availableRoutes, availableSchools, availableGrades, availableTags) {
   var self = this;
   var currentSort = {};
 
@@ -17,10 +17,7 @@ module.exports = [
   self.availableRoutes = availableRoutes;
   self.availableSchools = availableSchools;
   self.availableGrades = availableGrades;
-  self.availableEligibility = [
-    { name: 'Eligible', value: true, selected: false },
-    { name: 'Ineligible', value: false, selected: false }
-  ];
+  self.availableTags = availableTags;
 
   self.toggleAllStudents = function () {
     self.students.forEach(function (item) {
@@ -48,7 +45,7 @@ module.exports = [
     studentsService.getStudents({
       schools: getSelectedIds(self.availableSchools),
       grades: getSelectedIds(self.availableGrades),
-      eligibility: getSelectedIds(self.availableEligibility),
+      tags: getSelectedIds(self.availableTags),
       sort: currentSort
     }).then(function (data) {
       self.students = data;
@@ -65,6 +62,9 @@ module.exports = [
   };
 
   self.test = 'dlkfj';
+  self.deleteTag = function (tag) {
+    console.log(tag);
+  };
 
   self.toggle = function () {
     self.open = !self.open;

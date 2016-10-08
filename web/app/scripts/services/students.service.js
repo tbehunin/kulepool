@@ -56,6 +56,10 @@ module.exports = ['$q', '$http', function ($q, $http) {
     { id: 12, name: '11' },
     { id: 13, name: '12' }
   ];
+  var tagData = [
+    {id: 1, name: 'eligible'},
+    {id: 2, name: 'special needs'}
+  ];
 
   var studentData = [
     {
@@ -63,7 +67,7 @@ module.exports = ['$q', '$http', function ($q, $http) {
       firstName: 'Ava',
       grade: gradeData[7],
       school: schoolData[0],
-      eligible: true,
+      tags: [tagData[0]],
       assignedRoutes: {
         routes: [routeData[0], routeData[1]]
       }
@@ -73,7 +77,7 @@ module.exports = ['$q', '$http', function ($q, $http) {
       firstName: 'Eliza',
       grade: gradeData[5],
       school: schoolData[1],
-      eligible: false,
+      tags: [],
       assignedRoutes: {
         routes: []
       }
@@ -83,7 +87,7 @@ module.exports = ['$q', '$http', function ($q, $http) {
       firstName: 'Grant',
       grade: gradeData[3],
       school: schoolData[2],
-      eligible: true,
+      tags: [tagData[0], tagData[1]],
       assignedRoutes: {
         routes: [routeData[1]]
       }
@@ -99,9 +103,9 @@ module.exports = ['$q', '$http', function ($q, $http) {
       data = angular.isArray(query.grades) && query.grades.length > 0 ? data.filter(function (item) {
         return query.grades.includes(item.grade.id);
       }) : data;
-      data = angular.isArray(query.eligibility) && query.eligibility.length > 0 ? data.filter(function (item) {
-        return query.eligibility.includes(item.eligible);
-      }) : data;
+      // data = angular.isArray(query.tags) && query.tags.length > 0 ? data.filter(function (item) {
+      //   return query.tags.includes(item);
+      // }) : data;
       if (query.sort && query.sort.col) {
         data = data.sort(function (a, b) {
           var first = null, second = null;
@@ -121,10 +125,6 @@ module.exports = ['$q', '$http', function ($q, $http) {
             case 'grade':
               first = a.grade.name;
               second = b.grade.name;
-              break;
-            case 'eligibility':
-              first = a.eligible;
-              second = b.eligible;
               break;
           }
           if (query.sort.desc) {
@@ -150,5 +150,9 @@ module.exports = ['$q', '$http', function ($q, $http) {
   
   self.getGrades = function () {
     return $q.when(gradeData);
+  };
+  
+  self.getTags = function () {
+    return $q.when(tagData);
   };
 }];
