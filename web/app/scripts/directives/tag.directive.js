@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ['$filter', '$document', function ($filter, $document) {
+module.exports = [function () {
     return {
         restrict: 'E',
         scope: {
@@ -8,10 +8,10 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
             onRemove: '&tOnRemove'
         },
         templateUrl: 'views/tag.html',
-        link: function ($scope, $element) {
+        link: function ($scope) {
             $scope.tagClick = function ($event) {
                 $event.stopPropagation();
-            }
+            };
             $scope.removeTag = function () {
                 $scope.onRemove();
             };

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ['$q', '$http', function ($q, $http) {
+module.exports = ['$q', function ($q) {
   var self = this;
   var schoolData = [
     { id: 1, name: 'Aloha-Huber Park' },
