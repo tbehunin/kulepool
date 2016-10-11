@@ -4,7 +4,6 @@ var ctrl = ['modalService', function (modalService) {
     var self = this;
 
     self.deleteTag = function () {
-        console.log('clicked delete');
         var modalText = {
             title: 'Confirm Delete',
             body: 'Are you sure you want to delete tag \'' + self.data.tagName + '\' from \'' + self.data.objectName + '\'?'
