@@ -3,13 +3,13 @@
 var ctrl = ['modalService', function (modalService) {
     var self = this;
 
-    self.deleteTag = function () {
+    self.removeTag = function () {
         var modalText = {
-            title: 'Confirm Delete',
-            body: 'Are you sure you want to delete tag \'' + self.data.tagName + '\' from \'' + self.data.objectName + '\'?'
+            title: 'Remove Tag',
+            body: 'Are you sure you want to remove the \'' + self.data.tagName + '\' tag from \'' + self.data.objectName + '\'?'
         };
         modalService.openConfirmModal(modalText).then(function () {
-            self.onDelete();
+            self.onRemove();
         });
     };
 }];
@@ -20,6 +20,6 @@ module.exports = {
     controllerAs: '$ctrl',
     bindings: {
         data: '=tcData',
-        onDelete: '&tcOnDelete'
+        onRemove: '&tcOnRemove'
     }
 };

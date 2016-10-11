@@ -1,6 +1,6 @@
-<div class="btn-group" uib-dropdown ng-show="students.getSelectedStudentCount() > 0">
+<div class="btn-group" uib-dropdown ng-show="$ctrl.getSelectedStudentCount() > 0">
     <button type="button" class="btn btn-primary" uib-dropdown-toggle>
-        {{students.getSelectedStudentCount()}} Selected <span class="caret"></span>
+        {{$ctrl.getSelectedStudentCount()}} Selected <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" uib-dropdown-menu>
         <li><a href="#">Mark eligible</a></li>
@@ -11,47 +11,47 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th class="col-md-2" ng-class="{'sort-col-header': students.isCurrentSort('lastname')}">
+            <th class="col-md-2" ng-class="{'sort-col-header': $ctrl.isCurrentSort('lastname')}">
                 <div class="row">
                     <div class="col-md-2">
-                        <input type="checkbox" ng-click="students.toggleAllStudents()" ng-model="students.selectAllChecked">
+                        <input type="checkbox" ng-click="$ctrl.toggleAllStudents()" ng-model="$ctrl.selectAllChecked">
                     </div>
                     <div class="col-md-10">
-                        <span ng-click="students.sort('lastname')">Last Name
-                            <span class="fa fa-fw fa-sort" ng-class="{'fa-sort-asc': students.isCurrentSort('lastname', false), 'fa-sort-desc': students.isCurrentSort('lastname', true)}"></span>
+                        <span ng-click="$ctrl.sort('lastname')">Last Name
+                            <span class="fa fa-fw fa-sort" ng-class="{'fa-sort-asc': $ctrl.isCurrentSort('lastname', false), 'fa-sort-desc': $ctrl.isCurrentSort('lastname', true)}"></span>
                         </span>
                     </div>
                 </div>
             </th>
-            <th class="col-md-2" ng-class="{'sort-col-header': students.isCurrentSort('firstname')}">
-                <span ng-click="students.sort('firstname')">First Name
-                    <span class="fa fa-fw fa-sort" ng-class="{'fa-sort-asc': students.isCurrentSort('firstname', false), 'fa-sort-desc': students.isCurrentSort('firstname', true)}"></span>
+            <th class="col-md-2" ng-class="{'sort-col-header': $ctrl.isCurrentSort('firstname')}">
+                <span ng-click="$ctrl.sort('firstname')">First Name
+                    <span class="fa fa-fw fa-sort" ng-class="{'fa-sort-asc': $ctrl.isCurrentSort('firstname', false), 'fa-sort-desc': $ctrl.isCurrentSort('firstname', true)}"></span>
                 </span>
             </th>
-            <th class="col-md-2" ng-class="{'sort-col-header': students.isCurrentSort('school')}">
-                <multi-select-filter msf-options="students.availableSchools" msf-on-close="students.filterStudents()"></multi-select-filter>
-                <span ng-click="students.sort('school')">School
-                    <span class="fa fa-fw fa-sort" ng-class="{'fa-sort-asc': students.isCurrentSort('school', false), 'fa-sort-desc': students.isCurrentSort('school', true)}"></span>
+            <th class="col-md-2" ng-class="{'sort-col-header': $ctrl.isCurrentSort('school')}">
+                <multi-select-filter msf-options="$ctrl.availableSchools" msf-on-close="$ctrl.filterStudents()"></multi-select-filter>
+                <span ng-click="$ctrl.sort('school')">School
+                    <span class="fa fa-fw fa-sort" ng-class="{'fa-sort-asc': $ctrl.isCurrentSort('school', false), 'fa-sort-desc': $ctrl.isCurrentSort('school', true)}"></span>
                 </span>
             </th>
-            <th class="col-md-2" ng-class="{'sort-col-header': students.isCurrentSort('grade')}">
-                <multi-select-filter msf-options="students.availableGrades" msf-on-close="students.filterStudents()"></multi-select-filter>
-                <span ng-click="students.sort('grade')">Grade
-                    <span class="fa fa-fw fa-sort" ng-class="{'fa-sort-asc': students.isCurrentSort('grade', false), 'fa-sort-desc': students.isCurrentSort('grade', true)}"></span>
+            <th class="col-md-2" ng-class="{'sort-col-header': $ctrl.isCurrentSort('grade')}">
+                <multi-select-filter msf-options="$ctrl.availableGrades" msf-on-close="$ctrl.filterStudents()"></multi-select-filter>
+                <span ng-click="$ctrl.sort('grade')">Grade
+                    <span class="fa fa-fw fa-sort" ng-class="{'fa-sort-asc': $ctrl.isCurrentSort('grade', false), 'fa-sort-desc': $ctrl.isCurrentSort('grade', true)}"></span>
                 </span>
             </th>
             <th class="col-md-2">
-                <multi-select-filter msf-options="students.availableTags" msf-on-close="students.filterStudents()"></multi-select-filter>
+                <multi-select-filter msf-options="$ctrl.availableTags" msf-on-close="$ctrl.filterStudents()"></multi-select-filter>
                 <span>Tags</span>
             </th>
             <th class="col-md-2">
-                <multi-select-filter msf-options="students.availableRoutes"></multi-select-filter>
+                <multi-select-filter msf-options="$ctrl.availableRoutes"></multi-select-filter>
                 <span>Assigned Routes</span>
             </th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="student in students.students" ng-click="students.selectStudent(student)" blur-on-click ng-class="{'active' : student.selected }">
+        <tr ng-repeat="student in $ctrl.students" ng-click="$ctrl.selectStudent(student)" blur-on-click ng-class="{'active' : student.selected }">
             <td>
                 <div class="row">
                     <div class="col-md-2"><input type="checkbox" ng-checked="student.selected"></div>
@@ -61,10 +61,10 @@
             <td>{{student.firstName}}</td>
             <td>{{student.school.name}}</td>
             <td>{{student.grade.name}}</td>
-            <td><tag-component ng-repeat="tag in student.tags" tc-data="{tagName: tag.name, objectName: student.firstName + ' ' + student.lastName}" tc-on-delete="students.deleteTag(tag, student)"></tag-component></td>
+            <td><tag-component ng-repeat="tag in student.tags" tc-data="{tagName: tag.name, objectName: student.firstName + ' ' + student.lastName}" tc-on-remove="$ctrl.removeTag(tag, student)"></tag-component></td>
             <td>
                 <button uib-popover-template="'views/routesPopupTemplate.html'" popover-is-open="student.assignedRoutes.show" popover-placement="right"
-                popover-trigger="'outsideClick'" popover-append-to-body="true" type="button" class="btn btn-info" ng-click="students.hideAllPopups(); $event.stopPropagation();">
+                popover-trigger="'outsideClick'" popover-append-to-body="true" type="button" class="btn btn-info" ng-click="$ctrl.hideAllPopups(); $event.stopPropagation();">
                     {{student.assignedRoutes.routes.length}} <i class="fa fa-map-marker" aria-hidden="true"></i>
                 </button>
             </td>

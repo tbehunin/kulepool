@@ -62,7 +62,7 @@ module.exports = [
   };
 
   self.test = 'dlkfj';
-  self.deleteTag = function (tag, student) {
+  self.removeTag = function (tag, student) {
     // todo
   };
 

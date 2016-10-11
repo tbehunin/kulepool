@@ -43,7 +43,7 @@ angular.module('webApp', [
         url: '/students',
         templateUrl: 'views/students.html',
         controller: 'StudentsController',
-        controllerAs: 'students',
+        controllerAs: '$ctrl',
         resolve: {
           availableStudents: function (studentsService) {
             return studentsService.getStudents();
