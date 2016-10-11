@@ -63,6 +63,7 @@ module.exports = ['$q', function ($q) {
 
   var studentData = [
     {
+      id: '1',
       lastName: 'Behunin',
       firstName: 'Ava',
       grade: gradeData[7],
@@ -73,6 +74,7 @@ module.exports = ['$q', function ($q) {
       }
     },
     {
+      id: '2',
       lastName: 'Behunin',
       firstName: 'Eliza',
       grade: gradeData[5],
@@ -83,6 +85,7 @@ module.exports = ['$q', function ($q) {
       }
     },
     {
+      id: '3',
       lastName: 'Behunin',
       firstName: 'Grant',
       grade: gradeData[3],
@@ -154,5 +157,22 @@ module.exports = ['$q', function ($q) {
   
   self.getTags = function () {
     return $q.when(tagData);
+  };
+
+  self.removeTag = function (tag, student) {
+    var _student = studentData.filter(function (item) {
+      return item.id === student.id;
+    })[0];
+    
+    var idx = -1;
+    for (var i = 0; i < student.tags.length; i++) {
+      if (student.tags[i].id === tag.id) {
+        idx = i;
+        break;
+      }
+    }
+
+    student.tags.splice(idx, 1);
+    return $q.when();
   };
 }];

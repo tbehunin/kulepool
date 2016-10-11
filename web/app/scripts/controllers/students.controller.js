@@ -63,7 +63,9 @@ module.exports = [
 
   self.test = 'dlkfj';
   self.removeTag = function (tag, student) {
-    // todo
+    studentsService.removeTag(tag, student).then(function () {
+      self.filterStudents();
+    });
   };
 
   self.toggle = function () {
