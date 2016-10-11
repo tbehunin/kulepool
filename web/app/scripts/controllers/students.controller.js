@@ -62,8 +62,9 @@ module.exports = [
   };
 
   self.test = 'dlkfj';
-  self.deleteTag = function (tag) {
+  self.deleteTag = function (tag, student) {
     console.log(tag);
+    console.log(student);
   };
 
   self.toggle = function () {

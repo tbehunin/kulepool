@@ -65,5 +65,6 @@ angular.module('webApp', [
   });
 
 require('./services');
+require('./shared');
 require('./controllers');
 require('./directives');

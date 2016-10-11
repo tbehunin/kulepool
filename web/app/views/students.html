@@ -57,12 +57,11 @@
                     <div class="col-md-2"><input type="checkbox" ng-checked="student.selected"></div>
                     <div class="col-md-10">{{student.lastName}}</div>
                 </div>
-                
             </td>
             <td>{{student.firstName}}</td>
             <td>{{student.school.name}}</td>
             <td>{{student.grade.name}}</td>
-            <td><tag ng-repeat="tag in student.tags" t-name="tag.name" t-on-remove="students.deleteTag(tag)"></tag></td>
+            <td><tag-component ng-repeat="tag in student.tags" tc-data="{tagName: tag.name, objectName: student.firstName + ' ' + student.lastName}" tc-on-delete="students.deleteTag(tag, student)"></tag-component></td>
             <td>
                 <button uib-popover-template="'views/routesPopupTemplate.html'" popover-is-open="student.assignedRoutes.show" popover-placement="right"
                 popover-trigger="'outsideClick'" popover-append-to-body="true" type="button" class="btn btn-info" ng-click="students.hideAllPopups(); $event.stopPropagation();">
