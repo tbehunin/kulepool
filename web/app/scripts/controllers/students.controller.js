@@ -27,6 +27,7 @@ module.exports = [
   
   self.selectStudent = function (student) {
     student.selected = !student.selected;
+    self.selectAllChecked = self.students.length === self.getSelectedStudentCount();
   };
 
   self.getSelectedStudentCount = function () {

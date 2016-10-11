@@ -1,13 +1,7 @@
-<div class="btn-group" uib-dropdown ng-show="$ctrl.getSelectedStudentCount() > 0">
-    <button type="button" class="btn btn-primary" uib-dropdown-toggle>
-        {{$ctrl.getSelectedStudentCount()}} Selected <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" uib-dropdown-menu>
-        <li><a href="#">Mark eligible</a></li>
-        <li><a href="#">Mark ineligible</a></li>
-        <li><a href="#">Add to route...</a></li>
-    </ul>
-</div>
+<button class="btn btn-primary" ng-click="" ng-disabled="$ctrl.getSelectedStudentCount() === 0">
+    Update
+    <span ng-show="$ctrl.getSelectedStudentCount() > 0">({{$ctrl.getSelectedStudentCount()}})</span>
+</button>
 <table class="table table-hover">
     <thead>
         <tr>
