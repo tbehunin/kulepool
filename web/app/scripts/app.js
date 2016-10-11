@@ -61,6 +61,15 @@ angular.module('webApp', [
             return studentsService.getTags();
           }
         }
+      })
+      .state('updateStudents', {
+        url: '/updateStudents',
+        templateUrl: 'views/updateStudents.html',
+        controller: 'updateStudentsController',
+        controllerAs: '$ctrl',
+        params: {
+          selectedStudents: []
+        }
       });
   });
 

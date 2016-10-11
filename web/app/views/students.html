@@ -1,6 +1,6 @@
-<button class="btn btn-primary" ng-click="" ng-disabled="$ctrl.getSelectedStudentCount() === 0">
-    Update
-    <span ng-show="$ctrl.getSelectedStudentCount() > 0">({{$ctrl.getSelectedStudentCount()}})</span>
+<button class="btn btn-primary" ng-click="$ctrl.updateStudents()" ng-disabled="$ctrl.getSelectedStudentCount() === 0">
+    <i class="fa fa-pencil"></i>
+    <span ng-show="$ctrl.getSelectedStudentCount() > 0">{{$ctrl.getSelectedStudentCount()}}</span>
 </button>
 <table class="table table-hover">
     <thead>

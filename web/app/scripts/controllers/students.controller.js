@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = [
-  '$scope', 'studentsService', 'availableStudents', 'availableRoutes', 'availableSchools', 'availableGrades', 'availableTags', function ($scope, studentsService, availableStudents, availableRoutes, availableSchools, availableGrades, availableTags) {
+  '$scope', '$state', 'studentsService', 'availableStudents', 'availableRoutes', 'availableSchools', 'availableGrades', 'availableTags', function ($scope, $state, studentsService, availableStudents, availableRoutes, availableSchools, availableGrades, availableTags) {
   var self = this;
   var currentSort = {};
 
@@ -71,5 +71,13 @@ module.exports = [
 
   self.toggle = function () {
     self.open = !self.open;
+  };
+
+  self.updateStudents = function () {
+    $state.go('updateStudents', {
+      selectedStudents: self.students.filter(function (student) {
+        return student.selected;
+      })
+    });
   };
 }];
