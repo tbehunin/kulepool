@@ -4,16 +4,15 @@
         <span ng-if="anySelected()">{{selectionCount()}}</span>
     </button>
     <ul class="dropdown-menu dropdown-menu-form scrollable-menu" ng-style="{display: isOpen ? 'block' : 'none'}">
-        <li>
-            <button class="btn btn-link" disabled="disabled" ng-click="toggleAll(true)" ng-disabled="allOptionsSelection(true)"><i class="fa fa-check-square-o"></i> Select All</button>
-        </li>
-        <li>
-            <button class="btn btn-link" disabled="disabled" ng-click="toggleAll(false)" ng-disabled="allOptionsSelection(false)"><i class="fa fa-square-o"></i> Clear All</button>
+        <li ng-click="toggleAll()">
+            <a href="">
+                <span class="fa fa-lg fa-square-o" ng-class="{'fa-check-square': allOptionsSelected(), 'fa-square-o': !allOptionsSelected()}"></span> Toggle All
+            </a>
         </li>
         <li class="divider"></li>
         <li ng-repeat="option in options" ng-class="{'active': option.selected}" ng-click="toggleOption(option)">
             <a href="">
-                <span class="fa fa-lg" ng-class="{'fa-check-square-o': option.selected, 'fa-square-o': !option.selected}"></span> {{option.name}}
+                <span class="fa fa-lg fa-square-o" ng-class="{'fa-check-square': option.selected, 'fa-square-o': !option.selected}"></span> {{option.name}}
             </a>
         </li>
     </ul>

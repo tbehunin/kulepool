@@ -20,6 +20,7 @@ module.exports = [
   self.availableTags = availableTags;
 
   self.toggleAllStudents = function () {
+    self.selectAllChecked = !self.selectAllChecked;
     self.students.forEach(function (item) {
       item.selected = !!self.selectAllChecked;
     });

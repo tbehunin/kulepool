@@ -17,9 +17,10 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
                 option.selected = !option.selected;
             };
 
-            $scope.toggleAll = function (value) {
+            $scope.toggleAll = function () {
+                var selected = !$scope.allOptionsSelected();
                 $scope.options.forEach(function (option) {
-                    option.selected = value;
+                    option.selected = selected;
                 });
             };
 
@@ -43,9 +44,9 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
                 }).join(', ');
             };
 
-            $scope.allOptionsSelection = function (value) {
+            $scope.allOptionsSelected = function () {
                 return $scope.options.every(function (option) {
-                    return !!option.selected === value;
+                    return !!option.selected === true;
                 });
             };
 
