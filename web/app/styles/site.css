@@ -13,6 +13,10 @@
   border-color: #adadad;
 }
 
+li a.selected {
+  font-weight: bold;
+}
+
 .sort-col-header {
     border-bottom: 3px solid #46b8da !important;
 }

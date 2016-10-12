@@ -11,7 +11,7 @@
         </li>
         <li class="divider"></li>
         <li ng-repeat="option in options" ng-click="toggleOption(option)">
-            <a href="">
+            <a href="" ng-class="{'selected': option.selected}">
                 <span class="fa fa-lg fa-square-o" ng-class="{'fa-check-square': option.selected, 'fa-square-o': !option.selected}"></span> {{option.name}}
             </a>
         </li>
