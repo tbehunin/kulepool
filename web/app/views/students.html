@@ -1,6 +1,6 @@
-<button class="btn btn-primary pull-right" ng-click="$ctrl.updateStudents()" ng-disabled="$ctrl.getSelectedStudentCount() === 0">
+<button class="btn btn-primary pull-right" ng-click="$ctrl.updateStudents()" ng-disabled="$ctrl.selectionCount() === 0">
     Update Selected
-    <span ng-show="$ctrl.getSelectedStudentCount() > 0">({{$ctrl.getSelectedStudentCount()}}) <i class="fa fa-arrow-right"></i></span>
+    <span ng-show="$ctrl.selectionCount() > 0">({{$ctrl.selectionCount()}}) <i class="fa fa-arrow-right"></i></span>
 </button>
 <table class="table table-hover">
     <thead>
@@ -8,7 +8,7 @@
             <th class="col-md-2" ng-class="{'sort-col-header': $ctrl.isCurrentSort('lastname')}">
                 <div class="row">
                     <div class="col-md-2">
-                        <i class="fa fa-square-o fa-lg" ng-class="{'fa-check-square': $ctrl.selectAllChecked}" ng-click="$ctrl.toggleAllStudents()" ng-model="$ctrl.selectAllChecked"></i>
+                        <i class="fa fa-lg" ng-class="{'fa-check-square': $ctrl.allSelected(), 'fa-square-o': $ctrl.noneSelected(), 'fa-minus-square': $ctrl.someNotAllSelected()}" ng-click="$ctrl.toggleAllStudents()" ng-model="$ctrl.selectAllChecked"></i>
                     </div>
                     <div class="col-md-10">
                         <span ng-click="$ctrl.sort('lastname')">Last Name
@@ -45,7 +45,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="student in $ctrl.students" ng-click="$ctrl.selectStudent(student)" ng-class="{'active' : student.selected }">
+        <tr ng-repeat="student in $ctrl.students" ng-click="$ctrl.selectStudent(student)" ng-class="{'active selected' : student.selected }">
             <td>
                 <div class="row">
                     <div class="col-md-2"><i class="fa fa-lg" ng-class="{'fa-check-square': student.selected, 'fa-square-o': !student.selected}"></i></div>

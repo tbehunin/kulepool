@@ -20,20 +20,36 @@ module.exports = [
   self.availableTags = availableTags;
 
   self.toggleAllStudents = function () {
-    self.selectAllChecked = !self.selectAllChecked;
+    var selected = !self.allSelected();
     self.students.forEach(function (item) {
-      item.selected = !!self.selectAllChecked;
+      item.selected = selected;
     });
   };
   
   self.selectStudent = function (student) {
     student.selected = !student.selected;
-    self.selectAllChecked = self.students.length === self.getSelectedStudentCount();
   };
 
-  self.getSelectedStudentCount = function () {
-    return self.students.filter(function (item) {
-      return item.selected;
+  self.noneSelected = function () {
+    return self.selectionCount() === 0;
+  };
+
+  self.someNotAllSelected = function () {
+    var selectionCount = self.selectionCount();
+    return selectionCount > 0 && selectionCount < self.students.length;
+  };
+
+  self.allSelected = function () {
+    return self.selectionCount() === self.students.length;
+  };
+
+  self.anySelected = function () {
+    return self.selectionCount() > 0;
+  };
+
+  self.selectionCount = function () {
+    return self.students.filter(function (option) {
+        return !!option.selected;
     }).length;
   };
 

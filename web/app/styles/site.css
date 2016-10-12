@@ -13,7 +13,12 @@
   border-color: #adadad;
 }
 
-li a.selected {
+.dropdown-menu > li > a.selected {
+  font-weight: bold;
+  background-color: #f5f5f5;
+}
+
+tr.selected {
   font-weight: bold;
 }
 
