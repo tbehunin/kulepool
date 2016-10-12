@@ -18,16 +18,27 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
             };
 
             $scope.toggleAll = function () {
-                var selected = !$scope.allOptionsSelected();
+                var selected = !$scope.allSelected();
                 $scope.options.forEach(function (option) {
                     option.selected = selected;
                 });
             };
 
+            $scope.noneSelected = function () {
+                return $scope.selectionCount() === 0;
+            };
+
+            $scope.someNotAllSelected = function () {
+                var selectionCount = $scope.selectionCount();
+                return selectionCount > 0 && selectionCount < $scope.options.length;
+            };
+
+            $scope.allSelected = function () {
+                return $scope.selectionCount() === $scope.options.length;
+            };
+
             $scope.anySelected = function () {
-                return $scope.options.some(function (option) {
-                    return option.selected;
-                });
+                return $scope.selectionCount() > 0;
             };
 
             $scope.selectionCount = function () {
@@ -42,12 +53,6 @@ module.exports = ['$filter', '$document', function ($filter, $document) {
                 }).map(function (option) {
                     return option.name;
                 }).join(', ');
-            };
-
-            $scope.allOptionsSelected = function () {
-                return $scope.options.every(function (option) {
-                    return !!option.selected === true;
-                });
             };
 
             var closeHandler = function (event) {

@@ -1,16 +1,16 @@
 <div class="btn-group dropdown" ng-class="{'open': isOpen}">
-    <button type="button" class="btn dropdown-toggle btn-filter" ng-class="{'btn-info': anySelected(), 'btn-default no-selection': !anySelected()}" ng-click="toggleDropdown()" ng-attr-title="{{getTooltipTitle()}}">
+    <button type="button" class="btn dropdown-toggle btn-filter" ng-class="{'btn-info': anySelected(), 'btn-default no-selection': noneSelected()}" ng-click="toggleDropdown()" ng-attr-title="{{getTooltipTitle()}}">
         <span class="fa fa-filter"></span>
         <span ng-if="anySelected()">{{selectionCount()}}</span>
     </button>
     <ul class="dropdown-menu dropdown-menu-form scrollable-menu" ng-style="{display: isOpen ? 'block' : 'none'}">
         <li ng-click="toggleAll()">
             <a href="">
-                <span class="fa fa-lg fa-square-o" ng-class="{'fa-check-square': allOptionsSelected(), 'fa-square-o': !allOptionsSelected()}"></span> Toggle All
+                <span class="fa fa-lg" ng-class="{'fa-check-square': allSelected(), 'fa-square-o': noneSelected(), 'fa-minus-square': someNotAllSelected()}"></span> Toggle All
             </a>
         </li>
         <li class="divider"></li>
-        <li ng-repeat="option in options" ng-class="{'active': option.selected}" ng-click="toggleOption(option)">
+        <li ng-repeat="option in options" ng-click="toggleOption(option)">
             <a href="">
                 <span class="fa fa-lg fa-square-o" ng-class="{'fa-check-square': option.selected, 'fa-square-o': !option.selected}"></span> {{option.name}}
             </a>
