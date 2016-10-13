@@ -1,6 +1,6 @@
-<button class="btn btn-primary pull-right" ng-click="$ctrl.updateStudents()" ng-disabled="$ctrl.selectionCount() === 0">
-    Update Selected
-    <span ng-show="$ctrl.selectionCount() > 0">({{$ctrl.selectionCount()}}) <i class="fa fa-arrow-right"></i></span>
+<button class="btn btn-primary pull-right" ng-click="$ctrl.updateStudents()" ng-disabled="$ctrl.selectionCount() < 2">
+    Bulk Update
+    <span ng-show="$ctrl.selectionCount() > 1">({{$ctrl.selectionCount()}}) <i class="fa fa-arrow-right"></i></span>
 </button>
 <table class="table table-hover">
     <thead>
@@ -42,6 +42,7 @@
                 <multi-select-filter msf-options="$ctrl.availableRoutes"></multi-select-filter>
                 <span>Assigned Routes</span>
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -61,6 +62,9 @@
                 popover-trigger="'outsideClick'" popover-append-to-body="true" type="button" class="btn btn-info" ng-click="$ctrl.hideAllPopups(); $event.stopPropagation();">
                     {{student.assignedRoutes.routes.length}} <i class="fa fa-map-marker" aria-hidden="true"></i>
                 </button>
+            </td>
+            <td>
+                <button class="btn btn-primary">Select <i class="fa fa-arrow-right"></i> </button>
             </td>
         </tr>
     </tbody>
