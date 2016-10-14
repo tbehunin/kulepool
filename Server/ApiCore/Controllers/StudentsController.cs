@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebCore.Controllers
+namespace ApiCore.Controllers
 {
     [Route("api/[controller]")]
     public class StudentsController : Controller
