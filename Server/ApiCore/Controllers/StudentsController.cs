@@ -11,7 +11,7 @@ namespace WebCore.Controllers
     {
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> GetList(string where)
+        public IEnumerable<string> List(string where)
         {
             return new string[] { "value1", "value2" };
         }
