@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataRepo.Entities;
+using Dal.Entities;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -24,8 +24,8 @@ namespace Dal
         public StudentsRepository()
         {
             _client = new MongoClient();
-            _db = _client.GetDatabase("kulepule");
-            var collection = _db.GetCollection<Student>("students");
+            _db = _client.GetDatabase("kulepool");
+            _collection = _db.GetCollection<Student>("studentstodd");
         }
 
         public Student Get(string id)
@@ -35,7 +35,7 @@ namespace Dal
 
         public IList<Student> List(string query)
         {
-            return _collection.Find(query).ToList();
+            return string.IsNullOrWhiteSpace(query) ? _collection.Find("{}").ToList() : _collection.Find(query).ToList();
         }
     }
 }

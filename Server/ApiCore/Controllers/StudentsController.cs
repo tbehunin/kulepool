@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dal;
+using Dal.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCore.Controllers
@@ -11,9 +13,10 @@ namespace ApiCore.Controllers
     {
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> List(string where)
+        public IList<Student> List(string where)
         {
-            return new string[] { "value1", "value2" };
+            IStudentsRepository repo = new StudentsRepository();
+            return repo.List(where);
         }
 
         // GET api/values/5
