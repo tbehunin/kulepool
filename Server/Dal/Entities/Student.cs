@@ -12,7 +12,7 @@ namespace Dal.Entities
     public class Student
     {
         [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("id")]
+        //[BsonId]
         public string Id { get; set; }
         [BsonElement("lastName")]
         public string LastName { get; set; }

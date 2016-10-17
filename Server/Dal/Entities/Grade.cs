@@ -9,5 +9,7 @@ namespace Dal.Entities
         public string Id { get; set; }
         [BsonElement("name")]
         public string Name { get; set; }
+        [BsonElement("id")]
+        public string IdTest { get; set; }
     }
 }
