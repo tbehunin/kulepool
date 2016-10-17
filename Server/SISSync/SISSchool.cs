@@ -1,12 +1,11 @@
 ﻿namespace SISSync
 {
-    public class SISDistrict
+    public class SISSchool
     {
-        public DistrictData Data { get; set; }
+        public SchoolData Data { get; set; }
         public string Uri { get; set; }
-        public bool Synced { get; set; }
 
-        public class DistrictData
+        public class SchoolData
         {
             public string Id { get; set; }
             public string Name { get; set; }

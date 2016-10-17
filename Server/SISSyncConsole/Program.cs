@@ -13,6 +13,8 @@ namespace SISSyncConsole
     public class Program
     {
         private IDistrictsRepository _districtsRepo;
+        private ISchoolsRepository _schoolsRepo;
+
         public Program()
         {
             _districtsRepo = new DistrictsRepository();
@@ -28,19 +30,48 @@ namespace SISSyncConsole
 
         public void Run()
         {
-            // First call Clever to get list of all districts that share
-            var sisResp = JsonConvert.DeserializeObject<GetDistrictsResponse>(File.ReadAllText(@"C:\dev\kulepool\Server\SISSyncConsole\districts.json"));
+            // Call Clever to get list of all districts that share
+            var sisDistrictsResp = JsonConvert.DeserializeObject<GetDistrictsResponse>(File.ReadAllText(@"C:\dev\kulepool\Server\SISSyncConsole\districts.json"));
+            
+            // Query the DB to get list of existing districts
+            var dbDistricts = _districtsRepo.List();
 
-            Console.WriteLine("hi");
-            // Now call the DB to get a list of existing records
-            //var dbDistricts = _districtsRepo.List("");
+            foreach (var district in dbDistricts)
+            {
+                // Match the corresponding clever district
+                var sisDistrict = sisDistrictsResp.Data.FirstOrDefault(x => x.Data.Id.ToLower().Equals(district.Id.ToLower()));
 
-            //var list = sisDistricts["data"];
-            //foreach (var item in list)
-            //{
-            //    var district = item["data"];
-            //    Console.WriteLine(district["name"]);
-            //}
+                if (sisDistrict == null)
+                {
+                    // District stopped sharing..?
+                    // todo: mark this district as inactive?
+                    continue;
+                }
+
+                if (district.FullSync)
+                {
+                    // Batch get all schools for district from clever
+                    var sisSchoolsResp = JsonConvert.DeserializeObject<GetSchoolsResponse>(File.ReadAllText(@"C:\dev\kulepool\Server\SISSyncConsole\schools.json"));
+
+                    // Batch get all schools for district from db
+                    var dbSchools = _schoolsRepo.List($"{{districtId: \"{district.Id}\"}}");
+
+                    // after match, then
+                }
+                else
+                {
+                    // Sync Events
+                }
+
+                // Mark this district as completed
+                sisDistrict.Synced = true;
+            }
+
+            // Loop through the other way
+            foreach(var sisDistrict in sisDistrictsResp.Data.Where(x => !x.Synced))
+            {
+                //
+            }
         }
     }
 }

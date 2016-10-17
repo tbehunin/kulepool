@@ -7,30 +7,30 @@ using MongoDB.Driver;
 
 namespace Dal
 {
-    public interface IDistrictsRepository
+    public interface ISchoolsRepository
     {
-        void BulkWrite(IList<District> districts);
-        IList<District> List(string query = null);
+        void BulkWrite(IList<School> schools);
+        IList<School> List(string query = null);
     }
-    public class DistrictsRepository : IDistrictsRepository
+    public class SchoolsRepository : ISchoolsRepository
     {
         private MongoClient _client;
         private IMongoDatabase _db;
-        private IMongoCollection<District> _collection;
+        private IMongoCollection<School> _collection;
 
-        public DistrictsRepository()
+        public SchoolsRepository()
         {
             _client = new MongoClient();
             _db = _client.GetDatabase("kulepool");
-            _collection = _db.GetCollection<District>("districts");
+            _collection = _db.GetCollection<School>("schools");
         }
 
-        public void BulkWrite(IList<District> districts)
+        public void BulkWrite(IList<School> schools)
         {
             throw new NotImplementedException();
         }
 
-        public IList<District> List(string query)
+        public IList<School> List(string query)
         {
             throw new NotImplementedException();
         }
