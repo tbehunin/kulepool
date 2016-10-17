@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace SISSync
 {
-    public class Class1
+    public class GetDistrictsResponse
     {
-        public Class1()
-        {
-        }
+        public List<SISDistrict> Data { get; set; }
     }
 }
