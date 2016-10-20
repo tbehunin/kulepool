@@ -109,7 +109,6 @@ namespace SISSyncConsole
                             PhoneNumber = sisSchool.Data.Phone
                         });
                     }
-
                     _schoolsRepo.BulkSave(dbSchools);
 
                     foreach (var school in dbSchools)
@@ -121,7 +120,19 @@ namespace SISSyncConsole
 
                         foreach (var student in dbStudents)
                         {
-                            // do update stuff
+                            // Match the corresponding clever student
+                            var sisStudent = sisStudents.FirstOrDefault(x => x.Data.Id.Equals(student.SISStudentData.Data.Id));
+
+                            if (sisStudent == null)
+                            {
+                                // Student left the school..?
+                                // todo: mark this student as inactive?
+                                continue;
+                            }
+
+                            // Now map the new values to the db object
+                            student.School = school;
+                            student.SISStudentData = sisStudent;
                         }
 
                         // Add new students
