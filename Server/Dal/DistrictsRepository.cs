@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dal.Entities;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 
 namespace Dal
@@ -10,6 +12,7 @@ namespace Dal
     public interface IDistrictsRepository
     {
         void BulkWrite(IList<District> districts);
+        void Save(District district);
         IList<District> List(string query = null);
     }
     public class DistrictsRepository : IDistrictsRepository
@@ -30,9 +33,21 @@ namespace Dal
             throw new NotImplementedException();
         }
 
-        public IList<District> List(string query)
+        public void Save(District district)
         {
-            throw new NotImplementedException();
+            if (district.Id.Equals(ObjectId.Empty))
+            {
+                _collection.InsertOne(district);
+            }
+            else
+            {
+                _collection.ReplaceOne(x => x.Id == district.Id, district, new UpdateOptions { IsUpsert = true });
+            }
+        }
+
+        public IList<District> List(string query = null)
+        {
+            return string.IsNullOrWhiteSpace(query) ? _collection.Find("{}").ToList() : _collection.Find(query).ToList();
         }
     }
 }

@@ -4,7 +4,6 @@
     {
         public DistrictData Data { get; set; }
         public string Uri { get; set; }
-        public bool Synced { get; set; }
 
         public class DistrictData
         {
