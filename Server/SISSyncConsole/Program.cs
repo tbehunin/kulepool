@@ -68,7 +68,7 @@ namespace SISSyncConsole
                     foreach (var school in dbSchools)
                     {
                         // Match the corresponding clever school
-                        var sisSchool = sisSchoolsResp.Data.FirstOrDefault(x => x.Data.Id.ToLower().Equals(district.ExternalId.ToLower()));
+                        var sisSchool = sisSchoolsResp.Data.FirstOrDefault(x => x.Data.Id.ToLower().Equals(school.ExternalId.ToLower()));
 
                         if (sisSchool == null)
                         {

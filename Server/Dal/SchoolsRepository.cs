@@ -30,7 +30,7 @@ namespace Dal
         {
             var records = schools.Select(x => x.Id.Equals(ObjectId.Empty) ?
                 (WriteModel<School>)new InsertOneModel<School>(x) :
-                new ReplaceOneModel<School>(Builders<School>.Filter.Eq("School.Id", x.Id), x)).ToList();
+                new ReplaceOneModel<School>(Builders<School>.Filter.Eq("_id", x.Id), x)).ToList();
             _collection.BulkWrite(records);
         }
 
