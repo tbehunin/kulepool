@@ -13,6 +13,7 @@ namespace Dal
     {
         Student Get(string id);
         IList<Student> List(string query);
+        void BulkSave(IList<Student> students);
     }
 
     public class StudentsRepository : IStudentsRepository
@@ -25,7 +26,7 @@ namespace Dal
         {
             _client = new MongoClient();
             _db = _client.GetDatabase("kulepool");
-            _collection = _db.GetCollection<Student>("studentstodd");
+            _collection = _db.GetCollection<Student>("students");
         }
 
         public Student Get(string id)
@@ -36,6 +37,14 @@ namespace Dal
         public IList<Student> List(string query)
         {
             return string.IsNullOrWhiteSpace(query) ? _collection.Find("{}").ToList() : _collection.Find(query).ToList();
+        }
+
+        public void BulkSave(IList<Student> students)
+        {
+            var records = students.Select(x => x.Id.Equals(ObjectId.Empty) ?
+                (WriteModel<Student>)new InsertOneModel<Student>(x) :
+                new ReplaceOneModel<Student>(Builders<Student>.Filter.Eq("_id", x.Id), x)).ToList();
+            _collection.BulkWrite(records);
         }
     }
 }

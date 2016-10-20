@@ -16,11 +16,13 @@ namespace SISSyncConsole
     {
         private IDistrictsRepository _districtsRepo;
         private ISchoolsRepository _schoolsRepo;
+        private IStudentsRepository _studentsRepo;
 
         public Program()
         {
             _districtsRepo = new DistrictsRepository();
             _schoolsRepo = new SchoolsRepository();
+            _studentsRepo = new StudentsRepository();
         }
 
         public static void Main(string[] args)
@@ -87,7 +89,7 @@ namespace SISSyncConsole
                         school.PhoneNumber = sisSchool.Data.Phone;
                     }
 
-                    // Add new ones
+                    // Add new schools
                     foreach (var sisSchool in sisSchoolsResp.Data.Where(x => !dbSchools.Any(y => y.ExternalId == x.Data.Id)))
                     {
                         dbSchools.Add(new School
@@ -109,7 +111,31 @@ namespace SISSyncConsole
                     }
 
                     _schoolsRepo.BulkSave(dbSchools);
-                    Console.WriteLine("foo");
+
+                    foreach (var school in dbSchools)
+                    {
+                        // Get all students from Clever and from the db
+                        var sisStudents = JsonConvert.DeserializeObject<GetStudentsResponse>(File.ReadAllText(@"C:\dev\kulepool\Server\SISSyncConsole\students.json"))
+                            .Data.Where(x => x.Data.School.Equals(school.ExternalId)).ToList(); // simulate getting students from each school
+                        var dbStudents = _studentsRepo.List($"{{'School._id':ObjectId('{school.Id}')}}");
+
+                        foreach (var student in dbStudents)
+                        {
+                            // do update stuff
+                        }
+
+                        // Add new students
+                        foreach (var sisStudent in sisStudents.Where(x => !dbStudents.Any(y => y.SISStudentData.Data.Id == x.Data.Id)))
+                        {
+                            dbStudents.Add(new Student
+                            {
+                                School = school,
+                                SISStudentData = sisStudent
+                            });
+                        }
+                        _studentsRepo.BulkSave(dbStudents);
+                    }
+
                 }
                 else
                 {
