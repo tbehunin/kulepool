@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using Common;
-using Newtonsoft.Json;
+using Clever.Entities;
 
 namespace SISSync
 {

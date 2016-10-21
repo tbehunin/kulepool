@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Common;
+using Clever.Entities;
 
 namespace SISSync
 {

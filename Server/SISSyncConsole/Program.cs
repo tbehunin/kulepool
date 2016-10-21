@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Common;
 using Dal;
 using Dal.Entities;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SISSync;
 
 namespace SISSyncConsole
@@ -150,36 +146,6 @@ namespace SISSyncConsole
                     continue;
                 }
             }*/
-        }
-
-        private void ProcessSchoolsFullSync(SISDistrict sisDistrict, District district)
-        {
-            // Set Sync status
-            //district.SyncState.SyncSchoolsStatus = SyncStatuses.RetrievingData;
-            //_districtsRepo.Save(district);
-
-            //// Batch get all schools for district from clever
-            //var sisSchoolsResp = JsonConvert.DeserializeObject<GetSchoolsResponse>(File.ReadAllText(@"C:\dev\kulepool\Server\SISSyncConsole\schools.json"));
-
-            //// Batch get all schools for district from db
-            //var dbSchools = _schoolsRepo.List($"{{districtId: \"{district.Id}\"}}");
-
-            //// after match, then
-        }
-
-        private void ProcessTeachersFullSync()
-        {
-
-        }
-
-        private void ProcessStudentsFullSync()
-        {
-
-        }
-
-        private void ProcessSectionsFullSync()
-        {
-
         }
     }
 }
