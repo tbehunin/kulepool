@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Clever.Entities;
 using MongoDB.Bson;
 
 namespace Dal.Entities

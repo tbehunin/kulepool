@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Clever.Entities
 {
     public class SISDistrict
     {

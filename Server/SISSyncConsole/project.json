@@ -5,6 +5,7 @@
   },
 
   "dependencies": {
+    "Clever.Entities": "1.0.0-*",
     "Dal": "1.0.0-*",
     "Microsoft.NETCore.App": {
       "type": "platform",

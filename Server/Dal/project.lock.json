@@ -3,6 +3,9 @@
   "version": 2,
   "targets": {
     ".NETStandard,Version=v1.6": {
+      "Common/1.0.0": {
+        "type": "package"
+      },
       "Microsoft.CSharp/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -1570,23 +1573,34 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "Common/1.0.0": {
+      "Clever.Entities/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
+          "MongoDB.Driver": "2.3.0",
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1"
         },
         "compile": {
-          "netstandard1.6/Common.dll": {}
+          "netstandard1.6/Clever.Entities.dll": {}
         },
         "runtime": {
-          "netstandard1.6/Common.dll": {}
+          "netstandard1.6/Clever.Entities.dll": {}
         }
       }
     }
   },
   "libraries": {
+    "Common/1.0.0": {
+      "sha512": "RFyMsqFOaBxRjXAWsm2t9bc7qXMVUVya1iiIYYDai1vSM23ZSiPsr5WdgKXCIf9H7RTRwTXYkzikDPWeGl/wcQ==",
+      "type": "package",
+      "path": "Common/1.0.0",
+      "files": [
+        "Common.1.0.0.nupkg.sha512",
+        "Common.nuspec",
+        "lib/net40/Common.dll"
+      ]
+    },
     "Microsoft.CSharp/4.0.1": {
       "sha512": "17h8b5mXa87XYKrrVqdgZ38JefSUqLChUQpXgSnpzsM0nDOhE40FTeNWOJ/YmySGV6tG6T8+hjz6vxbknHJr6A==",
       "type": "package",
@@ -5374,14 +5388,15 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Common/1.0.0": {
+    "Clever.Entities/1.0.0": {
       "type": "project",
-      "path": "../Common/project.json",
-      "msbuildProject": "../Common/Common.xproj"
+      "path": "../Clever.Entities/project.json",
+      "msbuildProject": "../Clever.Entities/Clever.Entities.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
+      "Clever.Entities >= 1.0.0-*",
       "Common >= 1.0.0-*",
       "MongoDB.Driver >= 2.3.0",
       "NETStandard.Library >= 1.6.0"

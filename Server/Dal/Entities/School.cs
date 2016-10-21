@@ -1,6 +1,5 @@
-﻿using Common;
+﻿using Clever.Entities;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace Dal.Entities
 {
