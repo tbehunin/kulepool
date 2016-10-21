@@ -24,12 +24,12 @@ namespace Dal
 
         public DistrictsRepository()
         {
-            _client = new MongoClient();
-            _db = _client.GetDatabase("kulepool");
-            _collection = _db.GetCollection<District>("districts");
             var cp = new ConventionPack();
             cp.Add(new CamelCaseElementNameConvention());
             ConventionRegistry.Register("camel case", cp, x => true);
+            _client = new MongoClient();
+            _db = _client.GetDatabase("kulepool");
+            _collection = _db.GetCollection<District>("districts");
         }
 
         public void BulkWrite(IList<District> districts)

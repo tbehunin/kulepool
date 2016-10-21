@@ -25,9 +25,6 @@ namespace Dal
             _client = new MongoClient();
             _db = _client.GetDatabase("kulepool");
             _collection = _db.GetCollection<School>("schools");
-            var cp = new ConventionPack();
-            cp.Add(new CamelCaseElementNameConvention());
-            ConventionRegistry.Register("camel case", cp, x => true);
         }
 
         public void BulkSave(IList<School> schools)
