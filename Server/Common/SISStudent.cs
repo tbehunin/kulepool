@@ -8,37 +8,29 @@ namespace Common
 {
     public class SISStudent
     {
-        [JsonProperty("data")]
         public SISStudentData Data { get; set; }
     }
 
     public class SISStudentData
     {
-        [JsonProperty("created")]
         public string Created { get; set; }
-
-        [JsonProperty("credentials")]
+        
         public SISStudentDataCredentials Credentials { get; set; }
-
-        [JsonProperty("district")]
+        
         public string District { get; set; }
-
-        [JsonProperty("dob")]
+        
         public string DOB { get; set; }
 
         [JsonProperty("ell_status")]
         public string EllStatus { get; set; }
-
-        [JsonProperty("email")]
+        
         public string Email { get; set; }
 
         [JsonProperty("frl_status")]
         public string FrlStatus { get; set; }
-
-        [JsonProperty("gender")]
+        
         public string Gender { get; set; }
-
-        [JsonProperty("grade")]
+        
         public string Grade { get; set; }
 
         [JsonProperty("hispanic_ethnicity")]
@@ -49,14 +41,11 @@ namespace Common
 
         [JsonProperty("last_modified")]
         public string LastModified { get; set; }
-
-        [JsonProperty("location")]
+        
         public SISStudentDataLocation Location { get; set; }
-
-        [JsonProperty("name")]
+        
         public SISStudentDataName Name { get; set; }
-
-        [JsonProperty("school")]
+        
         public string School { get; set; }
 
         [JsonProperty("sis_id")]
@@ -68,7 +57,6 @@ namespace Common
         [JsonProperty("student_number")]
         public string StudentNumber { get; set; }
 
-        [JsonProperty("id")]
         public string Id { get; set; }
     }
 
@@ -80,19 +68,13 @@ namespace Common
 
     public class SISStudentDataLocation
     {
-        [JsonProperty("zip")]
         public string Zip { get; set; }
     }
 
     public class SISStudentDataName
     {
-        [JsonProperty("first")]
         public string First { get; set; }
-
-        [JsonProperty("last")]
         public string Last { get; set; }
-
-        [JsonProperty("middle")]
         public string Middle { get; set; }
     }
 }
