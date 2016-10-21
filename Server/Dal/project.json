@@ -3,7 +3,6 @@
 
   "dependencies": {
     "Clever.Entities": "1.0.0-*",
-    "Common": "1.0.0-*",
     "MongoDB.Driver": "2.3.0",
     "NETStandard.Library": "1.6.0"
   },
