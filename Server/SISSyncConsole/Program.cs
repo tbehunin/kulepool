@@ -46,6 +46,7 @@ namespace SISSyncConsole
                 {
                     district = new District
                     {
+                        ExternalId = sisDistrict.Data.Id,
                         SISData = sisDistrict,
                         SyncState = new SyncState
                         {
@@ -75,6 +76,7 @@ namespace SISSyncConsole
 
                         // Now map the new values to the db object
                         school.District = district;
+                        school.ExternalId = sisSchool.Data.Id;
                         school.SISData = sisSchool;
                     }
 
@@ -84,6 +86,7 @@ namespace SISSyncConsole
                         dbSchools.Add(new School
                         {
                             District = district,
+                            ExternalId = sisSchool.Data.Id,
                             SISData = sisSchool
                         });
                     }
@@ -109,6 +112,8 @@ namespace SISSyncConsole
                             }
 
                             // Now map the new values to the db object
+                            student.District = district;
+                            student.ExternalId = sisStudent.Data.Id;
                             student.School = school;
                             student.SISData = sisStudent;
                         }
@@ -118,6 +123,8 @@ namespace SISSyncConsole
                         {
                             dbStudents.Add(new Student
                             {
+                                District = district,
+                                ExternalId = sisStudent.Data.Id,
                                 School = school,
                                 SISData = sisStudent
                             });

@@ -8,6 +8,8 @@ namespace Dal.Entities
     {
         public ObjectId Id { get; set; }
 
+        public string ExternalId { get; set; }
+
         public District District { get; set; }
 
         public School School { get; set; }

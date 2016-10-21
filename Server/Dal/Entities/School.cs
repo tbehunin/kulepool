@@ -7,6 +7,8 @@ namespace Dal.Entities
     public class School
     {
         public ObjectId Id { get; set; }
+        
+        public string ExternalId { get; set; }
 
         public District District { get; set; }
 
