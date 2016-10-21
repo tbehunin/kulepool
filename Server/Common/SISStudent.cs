@@ -74,7 +74,9 @@ namespace Common
     public class SISStudentDataName
     {
         public string First { get; set; }
+
         public string Last { get; set; }
+
         public string Middle { get; set; }
     }
 }

@@ -45,16 +45,14 @@ namespace SISSyncConsole
             foreach (var sisDistrict in sisDistrictsResp.Data)
             {
                 // Match the corresponding db district
-                var district = dbDistricts.FirstOrDefault(x => x.ExternalId.ToLower().Equals(sisDistrict.Data.Id.ToLower()));
+                var district = dbDistricts.FirstOrDefault(x => x.SISData.Data.Id.Equals(sisDistrict.Data.Id));
                 if (district == null)
                 {
                     district = new District
                     {
-                        ExternalId = sisDistrict.Data.Id,
-                        Name = sisDistrict.Data.Name,
+                        SISData = sisDistrict,
                         SyncState = new SyncState
                         {
-                            BookmarkId = string.Empty,
                             FullSync = true
                         }
                     };
@@ -70,7 +68,7 @@ namespace SISSyncConsole
                     foreach (var school in dbSchools)
                     {
                         // Match the corresponding clever school
-                        var sisSchool = sisSchoolsResp.Data.FirstOrDefault(x => x.Data.Id.ToLower().Equals(school.ExternalId.ToLower()));
+                        var sisSchool = sisSchoolsResp.Data.FirstOrDefault(x => x.Data.Id.Equals(school.SISData.Data.Id));
 
                         if (sisSchool == null)
                         {
@@ -80,33 +78,17 @@ namespace SISSyncConsole
                         }
 
                         // Now map the new values to the db object
-                        school.Address = sisSchool.Data.Location;
                         school.District = district;
-                        school.ExternalId = sisSchool.Data.Id;
-                        school.HighGrade = sisSchool.Data.HighGrade;
-                        school.LowGrade = sisSchool.Data.LowGrade;
-                        school.Name = sisSchool.Data.Name;
-                        school.PhoneNumber = sisSchool.Data.Phone;
+                        school.SISData = sisSchool;
                     }
 
                     // Add new schools
-                    foreach (var sisSchool in sisSchoolsResp.Data.Where(x => !dbSchools.Any(y => y.ExternalId == x.Data.Id)))
+                    foreach (var sisSchool in sisSchoolsResp.Data.Where(x => !dbSchools.Any(y => y.SISData.Data.Id == x.Data.Id)))
                     {
                         dbSchools.Add(new School
                         {
-                            Address = new PhysicalLocation
-                            {
-                                Address = sisSchool.Data.Location.Address,
-                                City = sisSchool.Data.Location.City,
-                                State = sisSchool.Data.Location.State,
-                                ZipCode = sisSchool.Data.Location.ZipCode
-                            },
                             District = district,
-                            ExternalId = sisSchool.Data.Id,
-                            HighGrade = sisSchool.Data.HighGrade,
-                            LowGrade = sisSchool.Data.LowGrade,
-                            Name = sisSchool.Data.Name,
-                            PhoneNumber = sisSchool.Data.Phone
+                            SISData = sisSchool
                         });
                     }
                     _schoolsRepo.BulkSave(dbSchools);
@@ -115,13 +97,13 @@ namespace SISSyncConsole
                     {
                         // Get all students from Clever and from the db
                         var sisStudents = JsonConvert.DeserializeObject<GetStudentsResponse>(File.ReadAllText(@"C:\dev\kulepool\Server\SISSyncConsole\students.json"))
-                            .Data.Where(x => x.Data.School.Equals(school.ExternalId)).ToList(); // simulate getting students from each school
+                            .Data.Where(x => x.Data.School.Equals(school.SISData.Data.Id)).ToList(); // simulate getting students from each school
                         var dbStudents = _studentsRepo.List($"{{'School._id':ObjectId('{school.Id}')}}");
 
                         foreach (var student in dbStudents)
                         {
                             // Match the corresponding clever student
-                            var sisStudent = sisStudents.FirstOrDefault(x => x.Data.Id.Equals(student.SISStudentData.Data.Id));
+                            var sisStudent = sisStudents.FirstOrDefault(x => x.Data.Id.Equals(student.SISData.Data.Id));
 
                             if (sisStudent == null)
                             {
@@ -132,21 +114,20 @@ namespace SISSyncConsole
 
                             // Now map the new values to the db object
                             student.School = school;
-                            student.SISStudentData = sisStudent;
+                            student.SISData = sisStudent;
                         }
 
                         // Add new students
-                        foreach (var sisStudent in sisStudents.Where(x => !dbStudents.Any(y => y.SISStudentData.Data.Id == x.Data.Id)))
+                        foreach (var sisStudent in sisStudents.Where(x => !dbStudents.Any(y => y.SISData.Data.Id == x.Data.Id)))
                         {
                             dbStudents.Add(new Student
                             {
                                 School = school,
-                                SISStudentData = sisStudent
+                                SISData = sisStudent
                             });
                         }
                         _studentsRepo.BulkSave(dbStudents);
                     }
-
                 }
                 else
                 {
