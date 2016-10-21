@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Clever.Entities;
 using Dal.Entities;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
 namespace Dal
@@ -14,7 +12,7 @@ namespace Dal
     {
         Student Get(string id);
         IList<Student> List(string query);
-        void BulkSave(IList<Student> students);
+        void SyncStudents(District district, School school, IList<SISStudent> students);
     }
 
     public class StudentsRepository : IStudentsRepository
@@ -40,12 +38,40 @@ namespace Dal
             return string.IsNullOrWhiteSpace(query) ? _collection.Find("{}").ToList() : _collection.Find(query).ToList();
         }
 
-        public void BulkSave(IList<Student> students)
+        public void SyncStudents(District district, School school, IList<SISStudent> sisStudents)
         {
-            var records = students.Select(x => x.Id.Equals(ObjectId.Empty) ?
-                (WriteModel<Student>)new InsertOneModel<Student>(x) :
-                new ReplaceOneModel<Student>(Builders<Student>.Filter.Eq("_id", x.Id), x)).ToList();
-            _collection.BulkWrite(records);
+            var filter = Builders<Student>.Filter;
+            var update = Builders<Student>.Update;
+
+            // First mark all students in the school as volatile
+            _collection.UpdateMany(
+                filter.Eq(x => x.School.Id, school.Id),
+                update.Set(x => x.Volatile, true));
+
+            // Now update all students accordingly
+            var models = new List<UpdateOneModel<Student>>();
+            foreach (var sisStudent in sisStudents)
+            {
+                var model = new UpdateOneModel<Student>(
+                    filter.Eq(student => student.ExternalId, sisStudent.Data.Id),
+                    update
+                        .Set(student => student.Active, true)
+                        .Set(student => student.District, district)
+                        .Set(student => student.ExternalId, sisStudent.Data.Id)
+                        .Set(student => student.School, school)
+                        .Set(student => student.SISData, sisStudent)
+                        .Set(student => student.Volatile, false));
+                model.IsUpsert = true;
+                models.Add(model);
+            }
+            _collection.BulkWrite(models);
+
+            // Lastly inactivate any old schools
+            _collection.UpdateMany(
+                filter.Eq(x => x.School.Id, school.Id) & filter.Eq(x => x.Volatile, true),
+                update
+                    .Set(x => x.Active, false)
+                    .Set(x => x.Volatile, false));
         }
     }
 }

@@ -58,79 +58,19 @@ namespace SISSyncConsole
 
                 if (district.SyncState.FullSync || string.IsNullOrWhiteSpace(district.SyncState.BookmarkId))
                 {
-                    // Get all schools from Clever and from the db
-                    var sisSchoolsResp = JsonConvert.DeserializeObject<GetSchoolsResponse>(File.ReadAllText(@"C:\dev\kulepool\Server\SISSyncConsole\schools.json"));
-                    var dbSchools = _schoolsRepo.List($"{{'District._id':ObjectId('{district.Id}')}}");
+                    var sisSchools = JsonConvert.DeserializeObject<GetSchoolsResponse>(File.ReadAllText(@"C:\dev\kulepool\Server\SISSyncConsole\schools.json")).Data;
+                    _schoolsRepo.SyncSchools(district, sisSchools);
 
+                    var dbSchools = _schoolsRepo.List($"{{'district._id':ObjectId('{district.Id}')}}");
                     foreach (var school in dbSchools)
                     {
-                        // Match the corresponding clever school
-                        var sisSchool = sisSchoolsResp.Data.FirstOrDefault(x => x.Data.Id.Equals(school.SISData.Data.Id));
-
-                        if (sisSchool == null)
-                        {
-                            // District stopped sharing the school..?
-                            // todo: mark this district as inactive?
-                            continue;
-                        }
-
-                        // Now map the new values to the db object
-                        school.District = district;
-                        school.ExternalId = sisSchool.Data.Id;
-                        school.SISData = sisSchool;
-                    }
-
-                    // Add new schools
-                    foreach (var sisSchool in sisSchoolsResp.Data.Where(x => !dbSchools.Any(y => y.SISData.Data.Id == x.Data.Id)))
-                    {
-                        dbSchools.Add(new School
-                        {
-                            District = district,
-                            ExternalId = sisSchool.Data.Id,
-                            SISData = sisSchool
-                        });
-                    }
-                    _schoolsRepo.BulkSave(dbSchools);
-
-                    foreach (var school in dbSchools)
-                    {
-                        // Get all students from Clever and from the db
                         var sisStudents = JsonConvert.DeserializeObject<GetStudentsResponse>(File.ReadAllText(@"C:\dev\kulepool\Server\SISSyncConsole\students.json"))
                             .Data.Where(x => x.Data.School.Equals(school.SISData.Data.Id)).ToList(); // simulate getting students from each school
-                        var dbStudents = _studentsRepo.List($"{{'School._id':ObjectId('{school.Id}')}}");
-
-                        foreach (var student in dbStudents)
-                        {
-                            // Match the corresponding clever student
-                            var sisStudent = sisStudents.FirstOrDefault(x => x.Data.Id.Equals(student.SISData.Data.Id));
-
-                            if (sisStudent == null)
-                            {
-                                // Student left the school..?
-                                // todo: mark this student as inactive?
-                                continue;
-                            }
-
-                            // Now map the new values to the db object
-                            student.District = district;
-                            student.ExternalId = sisStudent.Data.Id;
-                            student.School = school;
-                            student.SISData = sisStudent;
-                        }
-
-                        // Add new students
-                        foreach (var sisStudent in sisStudents.Where(x => !dbStudents.Any(y => y.SISData.Data.Id == x.Data.Id)))
-                        {
-                            dbStudents.Add(new Student
-                            {
-                                District = district,
-                                ExternalId = sisStudent.Data.Id,
-                                School = school,
-                                SISData = sisStudent
-                            });
-                        }
-                        _studentsRepo.BulkSave(dbStudents);
+                        _studentsRepo.SyncStudents(district, school, sisStudents);
                     }
+
+                    // Now mark the district as syncing via events
+                    // todo
                 }
                 else
                 {
