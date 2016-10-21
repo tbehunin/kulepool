@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Clever.Entities
 {
@@ -16,19 +17,23 @@ namespace Clever.Entities
         public string District { get; set; }
 
         [JsonProperty("high_grade")]
+        [BsonElement("high_grade")]
         public string HighGrade { get; set; }
 
         [JsonProperty("last_modified")]
+        [BsonElement("last_modified")]
         public string LastModified { get; set; }
 
         public SISSchoolDataLocation Location { get; set; }
 
         [JsonProperty("low_grade")]
+        [BsonElement("low_grade")]
         public string LowGrade { get; set; }
 
         public string Name { get; set; }
 
         [JsonProperty("nces_id")]
+        [BsonElement("nces_id")]
         public string NcesId { get; set; }
 
         public string Phone { get; set; }
@@ -36,12 +41,15 @@ namespace Clever.Entities
         public SISSchoolDataPrincipal Principal { get; set; }
 
         [JsonProperty("school_number")]
+        [BsonElement("school_number")]
         public string SchoolNumber { get; set; }
 
         [JsonProperty("sis_id")]
+        [BsonElement("sis_id")]
         public string SisId { get; set; }
 
         [JsonProperty("state_id")]
+        [BsonElement("state_id")]
         public string StateId { get; set; }
 
         public string Id { get; set; }

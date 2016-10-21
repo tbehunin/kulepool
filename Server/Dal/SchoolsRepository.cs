@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dal.Entities;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
 namespace Dal
@@ -24,6 +25,9 @@ namespace Dal
             _client = new MongoClient();
             _db = _client.GetDatabase("kulepool");
             _collection = _db.GetCollection<School>("schools");
+            var cp = new ConventionPack();
+            cp.Add(new CamelCaseElementNameConvention());
+            ConventionRegistry.Register("camel case", cp, x => true);
         }
 
         public void BulkSave(IList<School> schools)

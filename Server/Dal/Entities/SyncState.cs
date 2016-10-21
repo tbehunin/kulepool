@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Dal.Entities
+﻿namespace Dal.Entities
 {
     public class SyncState
     {

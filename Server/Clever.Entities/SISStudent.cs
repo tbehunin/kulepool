@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
 namespace Clever.Entities
@@ -22,11 +23,13 @@ namespace Clever.Entities
         public string DOB { get; set; }
 
         [JsonProperty("ell_status")]
+        [BsonElement("ell_status")]
         public string EllStatus { get; set; }
         
         public string Email { get; set; }
 
         [JsonProperty("frl_status")]
+        [BsonElement("frl_status")]
         public string FrlStatus { get; set; }
         
         public string Gender { get; set; }
@@ -34,12 +37,15 @@ namespace Clever.Entities
         public string Grade { get; set; }
 
         [JsonProperty("hispanic_ethnicity")]
+        [BsonElement("hispanic_ethnicity")]
         public string HispanicEthnicity { get; set; }
 
         [JsonProperty("iep_status")]
+        [BsonElement("iep_status")]
         public string IepStatus { get; set; }
 
         [JsonProperty("last_modified")]
+        [BsonElement("last_modified")]
         public string LastModified { get; set; }
         
         public SISStudentDataLocation Location { get; set; }
@@ -49,12 +55,15 @@ namespace Clever.Entities
         public string School { get; set; }
 
         [JsonProperty("sis_id")]
+        [BsonElement("sis_id")]
         public string SisId { get; set; }
 
         [JsonProperty("state_id")]
+        [BsonElement("state_id")]
         public string StateId { get; set; }
 
         [JsonProperty("student_number")]
+        [BsonElement("student_number")]
         public string StudentNumber { get; set; }
 
         public string Id { get; set; }
@@ -63,6 +72,7 @@ namespace Clever.Entities
     public class SISStudentDataCredentials
     {
         [JsonProperty("district_username")]
+        [BsonElement("district_username")]
         public string DistrictUsername { get; set; }
     }
 
