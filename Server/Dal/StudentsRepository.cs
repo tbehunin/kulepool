@@ -30,7 +30,7 @@ namespace Dal
 
         public Student Get(string id)
         {
-            return _collection.Find($"{{ObjectId(\"{id}\")}}").FirstOrDefault();
+            return _collection.Find($"{{_id: ObjectId(\"{id}\")}}").FirstOrDefault();
         }
 
         public IList<Student> List(string query)
