@@ -30,7 +30,7 @@ namespace Dal
 
         public Student Get(string id)
         {
-            throw new NotImplementedException();
+            return _collection.Find($"{{ObjectId(\"{id}\")}}").FirstOrDefault();
         }
 
         public IList<Student> List(string query)
