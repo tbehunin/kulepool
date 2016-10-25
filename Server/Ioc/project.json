@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Autofac.Extensions.DependencyInjection": "4.0.0",
+    "NETStandard.Library": "1.6.0",
+    "Services": "1.0.0-*",
+    "System.ComponentModel": "4.0.1"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

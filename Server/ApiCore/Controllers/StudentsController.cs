@@ -1,30 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dal;
-using Dal.Entities;
+﻿using System.Collections.Generic;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Services;
 
 namespace ApiCore.Controllers
 {
     [Route("api/[controller]")]
     public class StudentsController : Controller
     {
-        // GET: api/values
-        [HttpGet]
-        public IList<Student> List(string where)
+        private IStudentsService _service;
+
+        public StudentsController(IStudentsService service)
         {
-            IStudentsRepository repo = new StudentsRepository();
-            return repo.List(where);
+            _service = service;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string GetItem(string id)
+        [HttpGet]
+        public string Get()
         {
-            return "value";
+            return "hello world!";
         }
+
+        [HttpGet("{id}")]
+        public Student Get(string id)
+        {
+            return _service.GetStudentById(id);
+        }
+
+       // GET: api/values
+       //[HttpGet]
+       // public IList<Student> List(string where)
+       // {
+       //     IStudentsRepository repo = new StudentsRepository();
+       //     return repo.List(where);
+       // }
+
+        // GET api/values/5
+        //[HttpGet("{id}")]
+        //public string GetItem(string id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/values
         [HttpPost]
