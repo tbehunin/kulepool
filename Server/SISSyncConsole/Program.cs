@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Dal;
 using Dal.Entities;
+using MongoDB.Driver;
 using Newtonsoft.Json;
 using SISSync;
 
@@ -16,9 +17,11 @@ namespace SISSyncConsole
 
         public Program()
         {
-            _districtsRepo = new DistrictsRepository();
-            _schoolsRepo = new SchoolsRepository();
-            _studentsRepo = new StudentsRepository();
+            var client = new MongoClient();
+            var db = "kulepool";
+            _districtsRepo = new DistrictsRepository(client, db);
+            _schoolsRepo = new SchoolsRepository(client, db);
+            _studentsRepo = new StudentsRepository(client, db);
         }
 
         public static void Main(string[] args)

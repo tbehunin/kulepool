@@ -17,14 +17,14 @@ namespace Dal
     }
     public class SchoolsRepository : ISchoolsRepository
     {
-        private MongoClient _client;
+        private IMongoClient _client;
         private IMongoDatabase _db;
         private IMongoCollection<School> _collection;
 
-        public SchoolsRepository()
+        public SchoolsRepository(IMongoClient client, string database)
         {
-            _client = new MongoClient();
-            _db = _client.GetDatabase("kulepool");
+            _client = client;
+            _db = _client.GetDatabase(database);
             _collection = _db.GetCollection<School>("schools");
         }
 

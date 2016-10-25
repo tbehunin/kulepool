@@ -18,17 +18,19 @@ namespace Dal
     }
     public class DistrictsRepository : IDistrictsRepository
     {
-        private MongoClient _client;
+        private IMongoClient _client;
         private IMongoDatabase _db;
         private IMongoCollection<District> _collection;
 
-        public DistrictsRepository()
+        public DistrictsRepository(IMongoClient client, string database)
         {
+            // todo: move this out to IOC config
             var cp = new ConventionPack();
             cp.Add(new CamelCaseElementNameConvention());
             ConventionRegistry.Register("camel case", cp, x => true);
-            _client = new MongoClient();
-            _db = _client.GetDatabase("kulepool");
+
+            _client = client;
+            _db = _client.GetDatabase(database);
             _collection = _db.GetCollection<District>("districts");
         }
 
