@@ -19,6 +19,6 @@ export class RoutesPage {
     }
 
     itemSelected(item: Route) {
-        this.navCtrl.push(RouteDetail);
+        this.navCtrl.push(RouteDetail, item);
     }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
-import { Route } from './route'
+import { NavController, Platform, NavParams } from 'ionic-angular';
+import { Route } from '../routes/route';
 import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng } from 'ionic-native';
 
 @Component({
@@ -8,9 +8,10 @@ import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng } from 'ionic-native';
   templateUrl: 'routeDetail.html'
 })
 export class RouteDetail {
-  map: GoogleMap;
- 
-    constructor(public navCtrl: NavController, public platform: Platform) {
+    map: GoogleMap;
+    route: Route;
+    constructor(public navCtrl: NavController, public platform: Platform, private navParams: NavParams) {
+        this.route = navParams.data;
         platform.ready().then(() => {
             this.loadMap();
         });
